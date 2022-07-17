@@ -4,7 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +33,27 @@ public class UserController extends BaseController {
 	@Autowired
 	UserService userService;
 
+	@GetMapping
+	@ApiOperation(value = "Get all users")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
+	public ResponseVO<User> getAllUsers() throws Exception {
+		logger.info("REST request to get all users: {}");
+
+		User user = userService.getAllUsers();
+		if (user != null) {
+			return prepareSuccessResponse(user);
+		}
+		return prepareErrorResponse(HttpStatus.NOT_FOUND.value(), CommonConstants.ErrorCode.NO_DATA_FOUND,
+				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
+
+	}
+
 	@GetMapping(value = "getUserByEmail")
 	@ApiOperation(value = "Get user by email id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
-	public ResponseVO<User> getParentByEmailId(@RequestParam(value = "emailId", required = true) String emailId)
+	public ResponseVO<User> getUserByEmailId(@RequestParam(value = "emailId", required = true) String emailId)
 			throws Exception {
 		logger.info("REST request to get parent user by email id: {}", emailId);
 
@@ -44,6 +64,48 @@ public class UserController extends BaseController {
 		return prepareErrorResponse(HttpStatus.NOT_FOUND.value(), CommonConstants.ErrorCode.NO_DATA_FOUND,
 				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
 
+	}
+
+	@PostMapping(value = "signup")
+	@ApiOperation(value = "Create user")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
+	public ResponseVO<User> create(@RequestBody User user) throws Exception {
+		logger.info("CREATE new user : ", user.toString());
+		User newUser = userService.saveUser(user);
+		if (newUser != null) {
+			return prepareSuccessResponse(newUser);
+		}
+		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.NO_DATA_SAVED,
+				CommonConstants.ErrorCodeMessage.NO_DATA_SAVED);
+	}
+
+	@PutMapping(value = "updateUser")
+	@ApiOperation(value = "Update user")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 500, message = "E5003-NO_DATA_UPDATED", response = ResponseVO.class) })
+	public ResponseVO<User> update(@RequestBody User user) throws Exception {
+		logger.info("Update new user : ", user.toString());
+		User newUser = userService.updateUser(user);
+		if (newUser != null) {
+			return prepareSuccessResponse(newUser);
+		}
+		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.NO_DATA_UPDATED,
+				CommonConstants.ErrorCodeMessage.NO_DATA_UPDATED);
+	}
+
+	@DeleteMapping(value = "deleteUser")
+	@ApiOperation(value = "Delete user")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
+	public ResponseVO<Boolean> delete(@RequestParam String userId) throws Exception {
+		logger.info("Delete new user : ", userId);
+		boolean deleted = userService.deleteUser(userId);
+		if (deleted) {
+			return prepareSuccessResponse(deleted);
+		}
+		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.NO_DATA_DELETED,
+				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
 	}
 
 }
