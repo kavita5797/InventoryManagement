@@ -1,5 +1,8 @@
 package com.humber.service;
 
+import java.util.List;
+
+import com.humber.common.vo.DataTableVO;
 import com.humber.model.User;
 
 public interface UserService {
@@ -12,5 +15,7 @@ public interface UserService {
 
 	boolean deleteUser(String userId);
 
-	User getAllUsers();
+	List<User> getAllUsers();
+
+	DataTableVO<User> getAllUsersByFilter(String searchText, int offset, int size, String sortField, int sortOrder);
 }
