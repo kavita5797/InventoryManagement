@@ -1,5 +1,6 @@
 package com.humber.service.impl;
 
+import java.io.Console;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,14 +37,32 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		if(userRepository.findById(user.getId()).isPresent()) {
+			User e=userRepository.findById(user.getId()).get();
+			e.setFirstName(user.getFirstName());
+			e.setLastName(user.getLastName());
+			e.setCity(user.getCity());
+			e.setCountry(user.getCountry());
+			e.setEmail(user.getEmail());
+			e.setPassword(user.getPassword());
+			e.setIsActive(user.getIsActive());
+			return userRepository.save(e);
+		}
+		else {
+			//log.severe("Update Failed");
+			return null;
+		}
 	}
 
 	@Override
 	public boolean deleteUser(String userId) {
-		// TODO Auto-generated method stub
-		return false;
+		 try {
+			 userRepository.deleteById(userId);
+			 return true;
+		 }
+		 catch(Exception e) {
+			 return false;
+		 }
 	}
 
 	@Override
