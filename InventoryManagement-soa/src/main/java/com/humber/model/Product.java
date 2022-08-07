@@ -16,5 +16,16 @@ public class Product {
 	private String id;
 
 	@Column
-	private String name;
+	private String productname;
+		
+	@Column
+	private String productlabel;
+	
+	@Column
+	private String productprice;
+	
+	@Column
+	private String productdescription;
+
+
 }
