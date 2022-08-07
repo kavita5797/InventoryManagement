@@ -21,11 +21,19 @@ public class Product {
 	@Column
 	private String productlabel;
 	
+	@Column()
+	private double productprice;
+
 	@Column
-	private String productprice;
+	private int productquality;
 	
 	@Column
 	private String productdescription;
 
+	
+	public Product() {
+		productprice = 0;
+		productquality = 0;
+	}
 
 }
