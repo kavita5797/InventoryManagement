@@ -59,7 +59,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfo("Inventory Management APIs", "API for Inventory Management", apiVersion, "1", null, "", "",
+		return new ApiInfo("Assignment 2 APIs", "API for Assignment 2", apiVersion, "1", null, "", "",
 				Collections.emptyList());
 	}
 

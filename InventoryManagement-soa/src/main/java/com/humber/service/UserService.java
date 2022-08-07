@@ -18,4 +18,6 @@ public interface UserService {
 	List<User> getAllUsers();
 
 	DataTableVO<User> getAllUsersByFilter(String searchText, int offset, int size, String sortField, int sortOrder);
+
+	User getUserById(String id);
 }

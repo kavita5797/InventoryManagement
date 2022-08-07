@@ -1,7 +1,5 @@
 package com.humber.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +34,14 @@ public class UserController extends BaseController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping
-	@ApiOperation(value = "Get all users")
+	@GetMapping("getById")
+	@ApiOperation(value = "Get user by id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
-	public ResponseVO<List<User>> getAllUsers() throws Exception {
-		logger.info("REST request to get all users: {}");
+	public ResponseVO<User> getUserById(@RequestParam(value = "id", required = true) String id) throws Exception {
+		logger.info("REST request to get user by id::" + id);
 
-		List<User> user = userService.getAllUsers();
+		User user = userService.getUserById(id);
 		if (user != null) {
 			return prepareSuccessResponse(user);
 		}
@@ -52,7 +50,7 @@ public class UserController extends BaseController {
 
 	}
 
-	@GetMapping("/filter")
+	@GetMapping
 	@ApiOperation(value = "Get all users by search and pagination")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
@@ -111,6 +109,10 @@ public class UserController extends BaseController {
 			@ApiResponse(code = 500, message = "E5003-NO_DATA_UPDATED", response = ResponseVO.class) })
 	public ResponseVO<User> update(@RequestBody User user) throws Exception {
 		logger.info("Update new user : ", user.toString());
+		if (userService.getUserById(user.getId()) == null) {
+			return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					CommonConstants.ErrorCode.USER_NOT_FOUND, CommonConstants.ErrorCodeMessage.NO_DATA_UPDATED);
+		}
 		User newUser = userService.updateUser(user);
 		if (newUser != null) {
 			return prepareSuccessResponse(newUser);
@@ -122,7 +124,7 @@ public class UserController extends BaseController {
 	@DeleteMapping(value = "deleteUser")
 	@ApiOperation(value = "Delete user")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
-			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
+			@ApiResponse(code = 500, message = "E5004-NO_DATA_DELETED", response = ResponseVO.class) })
 	public ResponseVO<Boolean> delete(@RequestParam String userId) throws Exception {
 		logger.info("Delete new user : ", userId);
 		boolean deleted = userService.deleteUser(userId);

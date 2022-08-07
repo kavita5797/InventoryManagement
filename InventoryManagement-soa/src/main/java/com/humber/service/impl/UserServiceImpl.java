@@ -1,8 +1,11 @@
 package com.humber.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +22,20 @@ import com.humber.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	UserRepository userRepository;
-	
+
+	@Override
+	public User getUserById(String id) {
+		Optional<User> user = userRepository.findById(id);
+		if (user.isPresent()) {
+			return user.get();
+		}
+		return null;
+	}
+
 	@Override
 	public User getUserByEmailId(String emailId) {
 		return userRepository.findByEmail(emailId);
@@ -31,18 +45,34 @@ public class UserServiceImpl implements UserService {
 	public User saveUser(User user) {
 		user.setId(UUID.randomUUID().toString());
 		user.setIsActive(1);
-		return userRepository.save(user);
+		user = userRepository.save(user);
+		logger.info("User created::" + user.toString());
+		return user;
 	}
 
 	@Override
 	public User updateUser(User user) {
-		// TODO Auto-generated method stub
+		User oldUser = getUserById(user.getId());
+		if (oldUser != null) {
+			oldUser.setFirstName(user.getFirstName());
+			oldUser.setLastName(user.getLastName());
+			oldUser.setEmail(user.getEmail());
+			oldUser.setCity(user.getCity());
+			oldUser.setCountry(user.getCountry());
+			user = userRepository.save(oldUser);
+			logger.info("User updated::" + user.toString());
+			return user;
+		}
 		return null;
 	}
 
 	@Override
 	public boolean deleteUser(String userId) {
-		// TODO Auto-generated method stub
+		if (getUserById(userId) != null) {
+			userRepository.deleteById(userId);
+			logger.info("User deleted::" + userId);
+			return true;
+		}
 		return false;
 	}
 
@@ -65,8 +95,8 @@ public class UserServiceImpl implements UserService {
 		userData.setFirst(pageable.getPageNumber());
 		userData.setRows(pageable.getPageSize());
 		if (searchText != null && searchText != "") {
-			userList = userRepository.findByEmailIgnoreCaseContainsOrFirstNameIgnoreCaseContains(
-					searchText, searchText, pageable);
+			userList = userRepository.findByEmailIgnoreCaseContainsOrFirstNameIgnoreCaseContains(searchText, searchText,
+					pageable);
 		} else {
 			userList = userRepository.findAll(pageable);
 		}
