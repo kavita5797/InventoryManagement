@@ -40,7 +40,7 @@ public class ProductCategoryController extends BaseController{
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
 	public ResponseVO<List<ProductCategory>> getAllProductCategory() throws Exception {
-		logger.info("REST request to get all products: {}");
+		logger.info("REST request to get all products category: {}");
 
 		List<ProductCategory> productCategory = productCategoryService.getAllProductCategory();
 		if (productCategory != null && !productCategory.isEmpty()) {
@@ -53,11 +53,11 @@ public class ProductCategoryController extends BaseController{
 	
 	
 	@PostMapping(value="createCategory")
-	@ApiOperation(value="Create a product category")
+	@ApiOperation(value="Create a Product Category")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
 	public ResponseVO<ProductCategory> createCategory(@RequestBody ProductCategory product) throws Exception {
-		logger.info("Create new product category:",product.toString());
+		logger.info("Create new Product Category:",product.toString());
 		ProductCategory newProduct = productCategoryService.saveProductCategory(product);
 		if(newProduct != null) {
 			return prepareSuccessResponse(newProduct);
@@ -73,7 +73,7 @@ public class ProductCategoryController extends BaseController{
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
 	public ResponseVO<Boolean> deleteCategory(@RequestParam String productCategoryId) throws Exception {
-		logger.info("Delete new Product Category: ",productCategoryId);
+		logger.info("Delete new Product Category: ",productCategoryId.toString());
 		boolean deleted = productCategoryService.deleteProductCategory(productCategoryId);
 		if(deleted) {
 			return prepareSuccessResponse(deleted);
