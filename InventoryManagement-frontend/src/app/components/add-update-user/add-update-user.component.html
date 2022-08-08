@@ -1,0 +1,57 @@
+<div class="add-update-user-page">
+    <div class="card">
+        
+        <div class="card-body pd-card">
+            <h2>Add Admin User</h2>
+            <form class="col-12" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        First Name
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="firstName" name="firstName"
+                        id="firstName" />
+                </div>
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Last Name
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="lastName" name="lastName"
+                        id="lastName" />
+                </div>
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Email
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="email" name="email" id="email" />
+                </div>
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Password
+                    </label>
+                    <input type="password" class="form-control col-sm-10" formControlName="password" name="password"
+                        id="password" />
+                </div>
+
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        City
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="city" name="city" id="city" />
+                </div>
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Country
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="country" name="country"
+                        id="country" />
+                </div>
+
+                <div class="form-row mt-2 mb-1 input-text">
+                    <button type="submit" class="btn btn-primary btn save-btn">
+                        SAVE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

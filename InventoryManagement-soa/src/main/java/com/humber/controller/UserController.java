@@ -60,8 +60,6 @@ public class UserController extends BaseController {
 			@RequestParam(value = "size", required = false, defaultValue = "20") int size,
 			@RequestParam(value = "sortField", required = false, defaultValue = "email") String sortField,
 			@RequestParam(value = "sortOrder", required = false, defaultValue = "1") int sortOrder) throws Exception {
-//		logger.info("GET All user, Params  : searchText=" + searchText + " offset=" + searchText + " offset=" + offset
-//				+ " size=" + size + " sortField=" + sortField + " sortOrder=" + sortOrder);
 
 		DataTableVO<User> data = userService.getAllUsersByFilter(searchText, offset, size, sortField, sortOrder);
 		if (data != null) {
@@ -95,7 +93,14 @@ public class UserController extends BaseController {
 			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
 	public ResponseVO<User> create(@RequestBody User user) throws Exception {
 		logger.info("CREATE new user : ", user.toString());
+		
+		if(userService.getUserByEmailId(user.getEmail()) != null) {
+			return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.USER_ALREADY_EXIST,
+					CommonConstants.ErrorCodeMessage.USER_ALREADY_EXIST);
+		}
+		
 		User newUser = userService.saveUser(user);
+		
 		if (newUser != null) {
 			return prepareSuccessResponse(newUser);
 		}

@@ -2,7 +2,7 @@
 	<property name="LOG_FILE_GENERAL" value="/general_log" />
 	<property name="LOG_FILE_USAGE" value="/usage_log" />
 	<property name="LOG_DIR"
-		value="C:\Users\mitul\OneDrive\Desktop\Humber Sem 4\Enterprise Application Modelling\workspace_spring\Project Logging" />
+		value="D:\Humber\Sem 4\Enterprise Application Modelling\Log" />
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>

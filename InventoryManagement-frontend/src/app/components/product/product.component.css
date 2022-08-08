@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+.add-update-btn-div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.add-update-btn {
+  border-radius: 15px;
+  height: 45px;
+  width: 45px;
+  background-color: #04aa6d;
+  font-weight: 700;
+}
