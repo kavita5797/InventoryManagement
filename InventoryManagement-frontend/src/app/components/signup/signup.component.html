@@ -1,9 +1,8 @@
-<div class="add-update-user-page">
+<div class="signup-page">
     <div class="card">
         <div class="card-body pd-card">
-
-            <h2>Update Admin User</h2>
-            <form class="col-12" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <form class="col-12" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <h2>Sign Up</h2>
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         First Name
@@ -22,9 +21,15 @@
                     <label class="col-sm-2 col-form-label label-text">
                         Email
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="email" name="email" id="email" readonly />
+                    <input type="text" class="form-control col-sm-10" formControlName="email" name="email" id="email" />
                 </div>
-
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Password
+                    </label>
+                    <input type="password" class="form-control col-sm-10" formControlName="password" name="password"
+                        id="password" />
+                </div>
 
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
@@ -39,12 +44,12 @@
                     <input type="text" class="form-control col-sm-10" formControlName="country" name="country"
                         id="country" />
                 </div>
-
                 <div class="mt-2 mb-1 btn-div">
                     <button type="submit" class="btn btn-primary btn save-btn">
-                        SAVE
+                        SIGN UP
                     </button>
                 </div>
+
             </form>
         </div>
     </div>

@@ -13,10 +13,5 @@ button{
 }
 
 .btn-div{
-    text-align: center;
-}
-
-a{
-    text-decoration: underline !important;
-    color: blue !important;
+    text-align: center !important;
 }

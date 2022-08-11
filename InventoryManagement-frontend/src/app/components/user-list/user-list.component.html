@@ -1,7 +1,6 @@
 <div class="add-update-btn-div">
-    <button class="add-update-btn" mat-fab color="primary" (click)="onAddUpdateButtonClick()"
-        aria-label="Example icon button with a delete icon">
-        <mat-icon>add</mat-icon>
+    <button class="add-update-btn" mat-fab color="primary" (click)="onAddUpdateButtonClick()">
+        <mat-icon class="add-icon">add</mat-icon>
     </button>
 </div>
 
@@ -10,7 +9,7 @@
     <button class="search-btn" type="button" value="Serach" name="Serach" (click)="searchUser()">Search</button>
 </div>
 
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
+<table mat-table [dataSource]="data" class="mat-elevation-z8 user-table">
 
 
     <ng-container matColumnDef="firstName">
@@ -40,6 +39,18 @@
         <td mat-cell *matCellDef="let element"> {{element.country}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let row">
+            <button mat-button (click)="deleteUser(row.id)" >
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-button (click)="updateUser(row.id)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
@@ -48,6 +59,8 @@
 
     <span class="page-span"> Dispay Page : {{offset+1}} / {{maxpage}}</span>
 
-    <button class="page-btn" type="button" value="Serach" name="Serach" [disabled]="offset == 0" (click)="previousPage()">Previous</button>
-    <button class="page-btn" type="button" value="Serach" name="Serach" [disabled]="(offset+1) == maxpage"  (click)="nextPage()">Next</button>
+    <button class="page-btn" type="button" value="Serach" name="Serach" [disabled]="offset == 0"
+        (click)="previousPage()">Previous</button>
+    <button class="page-btn" type="button" value="Serach" name="Serach" [disabled]="(offset+1) == maxpage"
+        (click)="nextPage()">Next</button>
 </div>

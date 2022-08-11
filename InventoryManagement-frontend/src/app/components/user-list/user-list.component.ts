@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route, Router } from '@angular/router';
 import { UserService } from 'src/app/service/UserService.service';
 
@@ -24,10 +25,12 @@ export class UserListComponent implements OnInit {
     'email',
     'city',
     'country',
+    'actions',
   ];
   constructor(
     private userservice: UserService,
     private _router: Router,
+    private _snackBar: MatSnackBar,
     @Inject(DOCUMENT) document: Document
   ) {}
 
@@ -72,11 +75,37 @@ export class UserListComponent implements OnInit {
         },
         (err) => {
           console.log(err);
+          this._snackBar.open('Something went wrong. Please try again.', "OK");
         }
       );
   }
 
   onAddUpdateButtonClick() {
     this._router.navigateByUrl('/add-update-user');
+  }
+
+  deleteUser(id: string) {
+    this.userservice.deleteUser(id).subscribe(
+      (res) => {
+        if (res.status && res.statusCode == '200') {
+          this._snackBar.open('Admin User deleted successfully.', "OK");
+        }
+        if (
+          !res.status &&
+          res.statusCode == '500' &&
+          res.errorCode == 'E5005'
+        ) {
+          this._snackBar.open(res.message, "OK");
+        }
+      },
+      (err) => {
+        console.log(err);
+        this._snackBar.open('Something went wrong. Please try again.', "OK");
+      }
+    );
+  }
+
+  updateUser(id: string) {
+    this._router.navigateByUrl('/add-update-user/' + id);
   }
 }

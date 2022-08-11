@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './service/ProductService.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { SignupComponent } from './components/signup/signup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AddUpdateUserComponent,
     LoginComponent,
     ProductCategoryListComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [UserService, ProductService],
   bootstrap: [AppComponent],

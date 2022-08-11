@@ -3,6 +3,7 @@ package com.humber.service;
 import java.util.List;
 
 import com.humber.common.vo.DataTableVO;
+import com.humber.common.vo.LoginVO;
 import com.humber.model.User;
 
 public interface UserService {
@@ -20,4 +21,6 @@ public interface UserService {
 	DataTableVO<User> getAllUsersByFilter(String searchText, int offset, int size, String sortField, int sortOrder);
 
 	User getUserById(String id);
+
+	User authenticate(LoginVO loginVO);
 }

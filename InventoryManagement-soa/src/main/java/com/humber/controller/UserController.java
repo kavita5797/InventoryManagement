@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.humber.common.constants.CommonConstants;
 import com.humber.common.vo.DataTableVO;
+import com.humber.common.vo.LoginVO;
 import com.humber.common.vo.ResponseVO;
 import com.humber.model.User;
 import com.humber.service.UserService;
@@ -34,11 +36,11 @@ public class UserController extends BaseController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("getById")
+	@GetMapping("getById/{id}")
 	@ApiOperation(value = "Get user by id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
-	public ResponseVO<User> getUserById(@RequestParam(value = "id", required = true) String id) throws Exception {
+	public ResponseVO<User> getUserById(@PathVariable("id") String id) throws Exception {
 		logger.info("REST request to get user by id::" + id);
 
 		User user = userService.getUserById(id);
@@ -85,6 +87,27 @@ public class UserController extends BaseController {
 		return prepareErrorResponse(HttpStatus.NOT_FOUND.value(), CommonConstants.ErrorCode.NO_DATA_FOUND,
 				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
 
+	}
+	
+	@PostMapping(value = "login")
+	@ApiOperation(value = "Login")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
+	public ResponseVO<User> create(@RequestBody LoginVO loginVO) throws Exception {
+		logger.info("Login user : ", loginVO.toString());
+		
+		if(userService.getUserByEmailId(loginVO.getEmail()) == null) {
+			return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.USER_NOT_FOUND,
+					CommonConstants.ErrorCodeMessage.USER_NOT_FOUND);
+		}
+		
+		User user = userService.authenticate(loginVO);
+		
+		if (user != null) {
+			return prepareSuccessResponse(user);
+		}
+		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.INVALID_CREDENTIALS,
+				CommonConstants.ErrorCodeMessage.INVALID_CREDENTIALS);
 	}
 
 	@PostMapping(value = "signup")

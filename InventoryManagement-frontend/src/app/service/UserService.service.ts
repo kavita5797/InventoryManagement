@@ -8,6 +8,11 @@ export class UserService {
 
   baseurl: string = 'http://localhost:6363/';
 
+  login(loginObj: any): Observable<any> {
+    var url = this.baseurl + 'user/login';
+    return this.http.post<any[]>(url, loginObj);
+  }
+
   getAllUsers(
     offset: number,
     size: number,
@@ -30,8 +35,23 @@ export class UserService {
     return this.http.get<any[]>(url);
   }
 
-  addAdmin(adminUser: any): Observable<any> {
+  getUserById(id: String): Observable<any> {
+    var url = this.baseurl + 'user/getById/' + id;
+    return this.http.get<any>(url);
+  }
+
+  signup(adminUser: any): Observable<any> {
     var url = this.baseurl + 'user/signup';
     return this.http.post<any>(url, adminUser);
+  }
+
+  updateUser(adminUser: any): Observable<any> {
+    var url = this.baseurl + 'user/updateUser';
+    return this.http.post<any>(url, adminUser);
+  }
+
+  deleteUser(id: string): Observable<any> {
+    var url = this.baseurl + 'user/deleteUser?userId=' + id;
+    return this.http.delete<any>(url);
   }
 }

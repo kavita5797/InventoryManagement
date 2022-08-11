@@ -1,6 +1,5 @@
 package com.humber.service.impl;
 
-import java.io.Console;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,6 +15,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.humber.common.vo.DataTableVO;
+import com.humber.common.vo.LoginVO;
 import com.humber.model.User;
 import com.humber.repository.UserRepository;
 import com.humber.service.UserService;
@@ -27,6 +27,18 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Override
+	public User authenticate(LoginVO loginVO) {
+		User user = userRepository.findByEmail(loginVO.getEmail());
+		if(user != null) {
+			if(user.getPassword().equals(loginVO.getPassword())) {
+				return user;
+			}
+			return null;
+		}
+		return null;
+	}
 
 	@Override
 	public User getUserById(String id) {
@@ -106,5 +118,7 @@ public class UserServiceImpl implements UserService {
 		userData.setTotalRecords((int) userList.getTotalElements());
 		return userData;
 	}
+
+	
 
 }

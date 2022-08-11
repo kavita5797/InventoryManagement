@@ -1,1 +1,31 @@
-<p>login works!</p>
+<div class="login-page">
+    <div class="card">
+        <div class="card-body pd-card">
+            <form class="col-12" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h2>Login</h2>
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Email
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="email" name="email" id="email" />
+                </div>
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Password
+                    </label>
+                    <input type="password" class="form-control col-sm-10" formControlName="password" name="password"
+                        id="password" />
+                </div>
+                <div class=" mt-2 mb-1 btn-div">
+                    <button type="submit" class="btn btn-primary btn save-btn">
+                        LOGIN
+                    </button>
+                </div>
+                <div class=" mt-2 mb-1 btn-div">
+                    Don't have account? 
+                    <a (click)="navigateToSignUp()"> Create new account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

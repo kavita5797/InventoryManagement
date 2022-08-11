@@ -10,6 +10,8 @@ public class CommonConstants {
 
 		public final static String USER_NOT_FOUND = "E5005";
 		public final static String USER_ALREADY_EXIST = "E5006";
+		
+		public final static String INVALID_CREDENTIALS = "E5007";
 	}
 
 	public class ErrorCodeMessage {
@@ -19,5 +21,6 @@ public class CommonConstants {
 		public final static String NO_DATA_DELETED = "Data is not deleted.";
 		public final static String USER_NOT_FOUND = "User for given id does not exist.";
 		public final static String USER_ALREADY_EXIST = "User with this email id already exist.";
+		public final static String INVALID_CREDENTIALS = "Invalid Credentials.";
 	}
 }
