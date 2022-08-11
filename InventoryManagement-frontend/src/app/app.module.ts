@@ -25,6 +25,7 @@ import { ProductReceivingStockComponent } from './components/product-receiving-s
 import { MerchantsListComponent } from './components/merchants-list/merchants-list.component';
 import { AddUpdateMerchantsComponent } from './components/add-update-merchants/add-update-merchants.component';
 import { MerchantService } from './service/MerchantService.service';
+import { ProductCategoryService } from './service/ProductCategoryService.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,7 @@ import { MerchantService } from './service/MerchantService.service';
     MatButtonModule,
     MatIconModule
   ],
-  providers: [UserService, ProductService , MerchantService],
+  providers: [UserService, ProductService , MerchantService , ProductCategoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

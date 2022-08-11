@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.humber.common.vo.DataTableVO;
 import com.humber.model.Merchant;
-import com.humber.model.Merchant;
 import com.humber.repository.MerchantRepository;
 import com.humber.service.MerchantService;
 
