@@ -7,7 +7,7 @@ import { UserService } from 'src/app/service/UserService.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
@@ -18,10 +18,9 @@ export class LoginComponent implements OnInit {
     private userservice: UserService,
     private _snackBar: MatSnackBar,
     private _router: Router
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     var loginObj = {
@@ -32,25 +31,28 @@ export class LoginComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res.status && res.statusCode == '200') {
-          this._snackBar.open('Admin User added successfully.' , "OK");
+          this.navigateToDashboard();
         }
         if (
           !res.status &&
           res.statusCode == '500' &&
-          res.errorCode == 'E5005'
+          (res.errorCode == 'E5005' || res.errorCode == 'E5007')
         ) {
-          this._snackBar.open(res.message, "OK");
+          this._snackBar.open(res.message, 'OK');
         }
       },
       (err) => {
         console.log(err);
-        this._snackBar.open('Something went wrong. Please try again.', "OK");
+        this._snackBar.open('Something went wrong. Please try again.', 'OK');
       }
     );
   }
 
-  navigateToSignUp(){
-    this._router.navigateByUrl("/signup");
+  navigateToDashboard() {
+    this._router.navigateByUrl('/dashboard');
   }
 
+  navigateToSignUp() {
+    this._router.navigateByUrl('/signup');
+  }
 }

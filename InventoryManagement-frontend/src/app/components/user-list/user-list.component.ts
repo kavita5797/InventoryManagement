@@ -89,6 +89,7 @@ export class UserListComponent implements OnInit {
       (res) => {
         if (res.status && res.statusCode == '200') {
           this._snackBar.open('Admin User deleted successfully.', "OK");
+          this.getAllUsers();
         }
         if (
           !res.status &&

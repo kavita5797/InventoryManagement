@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { SignupComponent } from './components/signup/signup.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { SignupComponent } from './components/signup/signup.component';
     LoginComponent,
     ProductCategoryListComponent,
     SignupComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

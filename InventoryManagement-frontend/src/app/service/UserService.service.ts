@@ -47,7 +47,7 @@ export class UserService {
 
   updateUser(adminUser: any): Observable<any> {
     var url = this.baseurl + 'user/updateUser';
-    return this.http.post<any>(url, adminUser);
+    return this.http.put<any>(url, adminUser);
   }
 
   deleteUser(id: string): Observable<any> {
