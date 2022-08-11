@@ -18,6 +18,9 @@ public class RecievingStock {
 
 	@Column
 	private String productId;
+	
+	@Column
+	private String merchantId;
 
 	@Column
 	private int quantity;

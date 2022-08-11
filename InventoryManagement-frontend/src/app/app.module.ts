@@ -21,6 +21,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProductReceivingStockComponent } from './components/product-receiving-stock/product-receiving-stock.component';
+import { MerchantsListComponent } from './components/merchants-list/merchants-list.component';
+import { AddUpdateMerchantsComponent } from './components/add-update-merchants/add-update-merchants.component';
+import { MerchantService } from './service/MerchantService.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +37,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ProductCategoryListComponent,
     SignupComponent,
     DashboardComponent,
+    ProductReceivingStockComponent,
+    MerchantsListComponent,
+    AddUpdateMerchantsComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatButtonModule,
     MatIconModule
   ],
-  providers: [UserService, ProductService],
+  providers: [UserService, ProductService , MerchantService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

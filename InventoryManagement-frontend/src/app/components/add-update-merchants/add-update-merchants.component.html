@@ -1,0 +1,54 @@
+<div class="add-update-merchant-page">
+    <div class="card">
+        <div class="card-body pd-card">
+
+            <h2>Merchant Details</h2>
+            <form class="col-12" [formGroup]="merchantForm" (ngSubmit)="onSubmit()">
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Name
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="name" name="name" id="name" />
+                </div>
+
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Email
+                    </label>
+                    <input *ngIf="this.id !== undefined" type="text" class="form-control col-sm-10" formControlName="email" name="email" id="email" readonly/>
+                    <input *ngIf="this.id === undefined" type="text" class="form-control col-sm-10" formControlName="email" name="email" id="email" />
+
+                </div>
+
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Phone
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="phone" name="phone" id="phone" />
+                </div>
+
+
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Address
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="address" name="address"
+                        id="address" />
+                </div>
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Country
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="country" name="country"
+                        id="country" />
+                </div>
+
+                <div class="mt-2 mb-1 btn-div">
+                    <button type="submit" class="btn btn-primary btn save-btn">
+                        SAVE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
