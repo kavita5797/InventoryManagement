@@ -33,6 +33,11 @@ public class PaymentController extends BaseController {
 	@Autowired
 	PaymentService paymentService;
 
+	/**
+	 * This mapping is to get all the payment
+	 * @return payment
+	 * @throws Exception
+	 */
 	@GetMapping
 	@ApiOperation(value = "Get all Payments")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -50,6 +55,14 @@ public class PaymentController extends BaseController {
 	}
 	
 	
+	/**
+	 * This mapping is to record payBills.
+	 * @param id
+	 * @param amount
+	 * @param paymentType
+	 * @return isPaid
+	 * @throws Exception
+	 */
 	@PostMapping("/payBill")
 	@ApiOperation(value = "Bill payment")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),

@@ -116,7 +116,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 
-	 * This method is to autenticate user.
+	 * This method is to authenticate user.
 	 * 
 	 * @param loginVO
 	 * @return

@@ -17,12 +17,25 @@ import com.humber.service.PaymentService;
 @Service
 public class PaymentServiceImpl  implements PaymentService{
 	
+	/**
+	 * This repository is for the payment operation.
+	 */
 	@Autowired
 	PaymentRepository paymentRepository;
 	
+	/**
+	 * This repository is for the receivingStock operation.
+	 */
 	@Autowired
 	ReceivingStockRepository receivingStockRepository;
 
+	/**
+	 * This method is used for bill payment.
+	 * @param id
+	 * @param amount
+	 * @param paymentType
+	 * @return isBillPaid
+	 */
 	@Override
 	public boolean billPayment(String id, double amount, String paymentType) {
 		Optional<RecievingStock> recievingStock = receivingStockRepository.findById(id);
@@ -52,6 +65,10 @@ public class PaymentServiceImpl  implements PaymentService{
 		return false;
 	}
 
+	/**
+	 * This method is used to get all the payment
+	 *return payment
+	 */
 	@Override
 	public List<Payment> getAllPayments() {
 		return (List<Payment>) paymentRepository.findAll();

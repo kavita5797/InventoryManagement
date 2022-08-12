@@ -37,6 +37,11 @@ public class ProductController extends BaseController {
 	@Autowired
 	ProductService productService;
 
+	/**
+	 * This mapping is used to get all products.
+	 * @return product
+	 * @throws Exception
+	 */
 	@GetMapping
 	@ApiOperation(value = "Get all products")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -54,6 +59,12 @@ public class ProductController extends BaseController {
 	}
 	
 	
+	/**
+	 * This mapping is used to get product by id
+	 * @param id
+	 * @return product
+	 * @throws Exception
+	 */
 	@GetMapping(value = "getProductById/{id}")
 	@ApiOperation(value = "Get product by id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -72,6 +83,12 @@ public class ProductController extends BaseController {
 	}
 	
 	
+	/**
+	 * This mapping is used to create a product 
+	 * @param product
+	 * @return product
+	 * @throws Exception
+	 */
 	@PostMapping(value = "createProduct")
 	@ApiOperation(value = "Create a new Product")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -87,6 +104,12 @@ public class ProductController extends BaseController {
 	}
 	
 	
+	/**
+	 * This mapping is used to update product
+	 * @param product
+	 * @return product
+	 * @throws Exception
+	 */
 	@PutMapping(value = "updateProduct")
 	@ApiOperation(value = "Update a Product")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -103,6 +126,12 @@ public class ProductController extends BaseController {
 	
 	
 	
+	/**
+	 * This mapping is used to delete a product
+	 * @param productId
+	 * @return isDeleted
+	 * @throws Exception
+	 */
 	@DeleteMapping(value = "deleteProduct")
 	@ApiOperation(value = "Delete a Product by Id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -117,6 +146,11 @@ public class ProductController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
 	}
 	
+	/**
+	 * This mapping is used to get total count
+	 * @return count
+	 * @throws Exception
+	 */
 	@GetMapping("count")
 	@ApiOperation(value = "Get total product count")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
@@ -127,6 +161,11 @@ public class ProductController extends BaseController {
 
 	}
 	
+	/**
+	 * This method is used to get total count of out of stock count
+	 * @return count
+	 * @throws Exception
+	 */
 	@GetMapping("outofstock")
 	@ApiOperation(value = "Get total out of stock product count")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })

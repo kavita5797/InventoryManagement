@@ -32,6 +32,11 @@ public class ReceivingStockController extends BaseController {
 	@Autowired
 	ReceivingStockService receivingStockService;
 
+	/**
+	 * This mapping is used to get all stock details
+	 * @return receivingStock
+	 * @throws Exception
+	 */
 	@GetMapping
 	@ApiOperation(value = "GET all Receiving Stock")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -46,6 +51,11 @@ public class ReceivingStockController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
 	}
 	
+	/**
+	 * This method is used to get all pending payments count
+	 * @return count
+	 * @throws Exception
+	 */
 	@GetMapping(value = "/pendingPayments")
 	@ApiOperation(value = "GET all pending Payments count")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -56,6 +66,12 @@ public class ReceivingStockController extends BaseController {
 		return prepareSuccessResponse(count);
 	}
 
+	/**
+	 * This method is used to create a receiving stock
+	 * @param receivedStock
+	 * @return receivingstock
+	 * @throws Exception
+	 */
 	@PostMapping
 	@ApiOperation(value = "Receiving Stock")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),

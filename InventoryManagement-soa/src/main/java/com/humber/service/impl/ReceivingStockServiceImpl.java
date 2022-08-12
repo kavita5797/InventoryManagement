@@ -22,15 +22,32 @@ public class ReceivingStockServiceImpl implements ReceivingStockService {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	/**
+	 * 
+	 *This repository is used for the receivingstock operation.
+	 */
 	@Autowired
 	ReceivingStockRepository receivingStockRepository;
 
+	/**
+	 * 
+	 *This repository is used for the product operation.
+	 */
 	@Autowired
 	ProductRepository productRepository;
 
+	/**
+	 * 
+	 *This repository is used for the merchant operation.
+	 */
 	@Autowired
 	MerchantRepository merchantRepository;
 
+	/**
+	 *This method is used to save stock operation.
+	 *@param receivingStock
+	 *@return ReceivingStock
+	 */
 	@Override
 	public RecievingStock save(RecievingStock receivedStock) {
 		receivedStock.setId(UUID.randomUUID().toString());
@@ -60,12 +77,20 @@ public class ReceivingStockServiceImpl implements ReceivingStockService {
 		return receivedStock;
 	}
 
+	/**
+	 *This method is used to get all stock details
+	 *@return ReceivingStock
+	 */
 	@Override
 	public List<RecievingStock> getAllStockDetails() {
 		logger.info("GET ALL Stock received::");
 		return (List<RecievingStock>) receivingStockRepository.findAll();
 	}
 
+	/**
+	 * This method is used to get all the pending payment count
+	 *@return get all the pending payment count.
+	 */
 	@Override
 	public int getAllPendingPaymentCount() {
 		return receivingStockRepository.countByPendingPayment(1);

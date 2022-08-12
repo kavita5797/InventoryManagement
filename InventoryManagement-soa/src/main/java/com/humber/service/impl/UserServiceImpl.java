@@ -26,9 +26,21 @@ public class UserServiceImpl implements UserService {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	/**
+	 * 
+	 *This repository is used for the user operation.
+	 */
 	@Autowired
 	UserRepository userRepository;
 
+	
+	
+	/**
+	 * 
+	 *This method is used to authenticate the user
+	 *@param loginVO
+	 *@return user
+	 */
 	@Override
 	public User authenticate(LoginVO loginVO) {
 		logger.info("User autentication::" + loginVO.toString());
@@ -45,6 +57,11 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	/**
+	 *This method is to get user by id.
+	 *@param id
+	 *@return user
+	 */
 	@Override
 	public User getUserById(String id) {
 		Optional<User> user = userRepository.findById(id);
@@ -56,12 +73,22 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	/**
+	 * This method is to get the user by their emailid
+	 *@param emailid
+	 *@return user
+	 */
 	@Override
 	public User getUserByEmailId(String emailId) {
 		logger.info("GET User by emailid::");
 		return userRepository.findByEmail(emailId.toLowerCase());
 	}
 
+	/**
+	 *This method is used to save user.
+	 *@param user
+	 *@return user
+	 */
 	@Override
 	public User saveUser(User user) {
 		user.setId(UUID.randomUUID().toString());
@@ -75,6 +102,11 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	/**
+	 *This method is used to update user.
+	 *@param user
+	 *@return user
+	 */
 	@Override
 	public User updateUser(User user) {
 		User oldUser = getUserById(user.getId());
@@ -91,6 +123,11 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	/**
+	 * This method is used to delete user.
+	 * @param userId
+	 *@return isDeleted
+	 */
 	@Override
 	public boolean deleteUser(String userId) {
 		if (getUserById(userId) != null) {
@@ -101,12 +138,27 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
+	/**
+	 *This method is used to get all users
+	 *@return user
+	 *
+	 */
 	@Override
 	public List<User> getAllUsers() {
 		logger.info("GET All users::");
 		return (List<User>) userRepository.findAll();
 	}
 
+	/**
+	 * This method is used to get all users by pagination and filter
+	 * @param searchText
+	 * @param offset
+	 * @param size
+	 * @param sortField
+	 * @param sortOrder
+	 * @return users
+	 *
+	 */
 	@Override
 	public DataTableVO<User> getAllUsersByFilter(String searchText, int offset, int size, String sortField,
 			int sortOrder) {
@@ -133,6 +185,10 @@ public class UserServiceImpl implements UserService {
 		return userData;
 	}
 
+	/**
+	 * This method is used to get total count.
+	 *@return count
+	 */
 	@Override
 	public long getTotalCount() {
 		logger.info("GET All users count::" + userRepository.count());

@@ -5,6 +5,12 @@ import org.springframework.http.HttpStatus;
 import com.humber.common.vo.ResponseVO;
 
 public class BaseController {
+	/**
+	 * This method is used to prepare a success response.
+	 * @param <T>
+	 * @param data
+	 * @return response
+	 */
 	protected <T> ResponseVO<T> prepareSuccessResponse(T data) {
 
 		ResponseVO<T> response = new ResponseVO<>();
@@ -17,6 +23,14 @@ public class BaseController {
 		return response;
 	}
 
+	/**
+	 * This method is used to prepare an error response.
+	 * @param <T>
+	 * @param statusCode
+	 * @param errorCode
+	 * @param errorMessage
+	 * @return Response
+	 */
 	protected <T> ResponseVO<T> prepareErrorResponse(int statusCode, String errorCode, String errorMessage) {
 
 		ResponseVO<T> response = new ResponseVO<>();
@@ -29,6 +43,14 @@ public class BaseController {
 		return response;
 	}
 
+	/**
+	 * This method is used to prepare a response
+	 * @param <T>
+	 * @param data
+	 * @param statusCode
+	 * @param message
+	 * @return Response
+	 */
 	protected <T> ResponseVO<T> prepareResponse(T data, int statusCode, String message) {
 
 		ResponseVO<T> response = new ResponseVO<>();

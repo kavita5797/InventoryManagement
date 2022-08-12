@@ -34,6 +34,11 @@ public class ProductCategoryController extends BaseController{
 	@Autowired
 	ProductCategoryService productCategoryService;
 	
+	/**
+	 * This mapping is used to get all product category
+	 * @return productCategory
+	 * @throws Exception
+	 */
 	@GetMapping
 	@ApiOperation(value = "Get all products category")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -51,6 +56,12 @@ public class ProductCategoryController extends BaseController{
 	}
 	
 	
+	/**
+	 * This mapping is used to create a category.
+	 * @param product
+	 * @return productCategory
+	 * @throws Exception
+	 */
 	@PostMapping(value="createCategory")
 	@ApiOperation(value="Create a Product Category")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -67,6 +78,12 @@ public class ProductCategoryController extends BaseController{
 		
 	}
 	
+	/**
+	 * This mapping is used to delete a category.
+	 * @param productCategoryId
+	 * @return isDeleted
+	 * @throws Exception
+	 */
 	@DeleteMapping(value="deleteCategory")
 	@ApiOperation(value="Delete Category")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -83,6 +100,11 @@ public class ProductCategoryController extends BaseController{
 	}
 	
 	
+	/**
+	 * This mapping is used get total count for product category
+	 * @return count
+	 * @throws Exception
+	 */
 	@GetMapping("count")
 	@ApiOperation(value = "Get total product category count")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
