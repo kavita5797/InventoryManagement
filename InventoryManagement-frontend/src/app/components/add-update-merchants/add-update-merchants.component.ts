@@ -80,7 +80,7 @@ export class AddUpdateMerchantsComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res.status && res.statusCode == '200') {
-          this._snackBar.open('Admin Merchant added successfully.', 'OK');
+          this._snackBar.open('Merchant added successfully.', 'OK');
           this._router.navigateByUrl("/merchant-list");
         }
         if (

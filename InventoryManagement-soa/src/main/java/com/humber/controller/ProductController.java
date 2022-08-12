@@ -132,7 +132,7 @@ public class ProductController extends BaseController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
 	public ResponseVO<Long> getTotalOutOfStockCount() throws Exception {
 		logger.info("REST request to get total out of stock product count::");
-		long productCount = productService.getTotalCount();
+		long productCount = productService.getTotalOutOfStockCount();
 		return prepareSuccessResponse(productCount);
 
 	}
