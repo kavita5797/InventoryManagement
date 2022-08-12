@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User authenticate(LoginVO loginVO) {
-		User user = userRepository.findByEmail(loginVO.getEmail());
+		User user = userRepository.findByEmail(loginVO.getEmail().toLowerCase());
 		if(user != null) {
 			if(CommonUtility.decrypt(user.getPassword()).equals(loginVO.getPassword())) {
 				return user;
@@ -53,13 +53,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserByEmailId(String emailId) {
-		return userRepository.findByEmail(emailId);
+		return userRepository.findByEmail(emailId.toLowerCase());
 	}
 
 	@Override
 	public User saveUser(User user) {
 		user.setId(UUID.randomUUID().toString());
 		user.setIsActive(1);
+		String email = user.getEmail().toLowerCase();
+		user.setEmail(email);
 		String password = CommonUtility.encrypt(user.getPassword());
 		user.setPassword(password);
 		user = userRepository.save(user);
@@ -73,7 +75,7 @@ public class UserServiceImpl implements UserService {
 		if (oldUser != null) {
 			oldUser.setFirstName(user.getFirstName());
 			oldUser.setLastName(user.getLastName());
-			oldUser.setEmail(user.getEmail());
+			oldUser.setEmail(user.getEmail().toLowerCase());
 			oldUser.setCity(user.getCity());
 			oldUser.setCountry(user.getCountry());
 			user = userRepository.save(oldUser);
