@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: 'product-list', component: ProductComponent },
   { path: 'product-list/:id', component: ProductComponent },
   { path: 'add-update-product', component: AddUpdateProductComponent },
+  { path: 'add-update-product/:id', component: AddUpdateProductComponent },
+
   { path: 'product-category-list', component: ProductCategoryListComponent },
   { path: 'product-stock', component: ProductReceivingStockComponent },
   { path: 'login', component: LoginComponent },

@@ -28,6 +28,9 @@ public class Product {
 	private int productquality;
 	
 	@Column
+	private String productcategory;
+	
+	@Column
 	private String productdescription;
 
 	
