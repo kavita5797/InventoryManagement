@@ -23,4 +23,6 @@ public interface UserService {
 	User getUserById(String id);
 
 	User authenticate(LoginVO loginVO);
+
+	long getTotalCount();
 }

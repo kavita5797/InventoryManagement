@@ -119,6 +119,11 @@ public class UserServiceImpl implements UserService {
 		return userData;
 	}
 
+	@Override
+	public long getTotalCount() {
+		return userRepository.count();
+	}
+
 	
 
 }

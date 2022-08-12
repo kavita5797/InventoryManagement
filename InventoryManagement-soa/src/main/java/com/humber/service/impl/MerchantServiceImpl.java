@@ -100,4 +100,9 @@ public class MerchantServiceImpl implements MerchantService {
 		return merchantData;
 	}
 
+	@Override
+	public long getTotalCount() {
+		return merchantRepository.count();
+	}
+
 }

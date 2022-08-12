@@ -88,26 +88,26 @@ public class UserController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
 
 	}
-	
+
 	@PostMapping(value = "login")
 	@ApiOperation(value = "Login")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
 	public ResponseVO<User> create(@RequestBody LoginVO loginVO) throws Exception {
 		logger.info("Login user : ", loginVO.toString());
-		
-		if(userService.getUserByEmailId(loginVO.getEmail()) == null) {
-			return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.USER_NOT_FOUND,
-					CommonConstants.ErrorCodeMessage.USER_NOT_FOUND);
+
+		if (userService.getUserByEmailId(loginVO.getEmail()) == null) {
+			return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					CommonConstants.ErrorCode.USER_NOT_FOUND, CommonConstants.ErrorCodeMessage.USER_NOT_FOUND);
 		}
-		
+
 		User user = userService.authenticate(loginVO);
-		
+
 		if (user != null) {
 			return prepareSuccessResponse(user);
 		}
-		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.INVALID_CREDENTIALS,
-				CommonConstants.ErrorCodeMessage.INVALID_CREDENTIALS);
+		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+				CommonConstants.ErrorCode.INVALID_CREDENTIALS, CommonConstants.ErrorCodeMessage.INVALID_CREDENTIALS);
 	}
 
 	@PostMapping(value = "signup")
@@ -116,14 +116,14 @@ public class UserController extends BaseController {
 			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
 	public ResponseVO<User> create(@RequestBody User user) throws Exception {
 		logger.info("CREATE new user : ", user.toString());
-		
-		if(userService.getUserByEmailId(user.getEmail()) != null) {
-			return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.USER_ALREADY_EXIST,
-					CommonConstants.ErrorCodeMessage.USER_ALREADY_EXIST);
+
+		if (userService.getUserByEmailId(user.getEmail()) != null) {
+			return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					CommonConstants.ErrorCode.USER_ALREADY_EXIST, CommonConstants.ErrorCodeMessage.USER_ALREADY_EXIST);
 		}
-		
+
 		User newUser = userService.saveUser(user);
-		
+
 		if (newUser != null) {
 			return prepareSuccessResponse(newUser);
 		}
@@ -161,6 +161,16 @@ public class UserController extends BaseController {
 		}
 		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.NO_DATA_DELETED,
 				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
+	}
+
+	@GetMapping("count")
+	@ApiOperation(value = "Get total user count")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
+	public ResponseVO<Long> getTotalCount() throws Exception {
+		logger.info("REST request to get total user count::");
+		long userCount = userService.getTotalCount();
+		return prepareSuccessResponse(userCount);
+
 	}
 
 }

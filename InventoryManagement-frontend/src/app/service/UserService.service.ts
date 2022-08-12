@@ -54,4 +54,9 @@ export class UserService {
     var url = this.baseurl + 'user/deleteUser?userId=' + id;
     return this.http.delete<any>(url);
   }
+
+  getUserCount(): Observable<any> {
+    var url = this.baseurl + 'user/count';
+    return this.http.get<any>(url);
+  }
 }

@@ -10,33 +10,25 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "orderStock")
+@Table(name = "payment")
 @Data
-public class OrderStock {
+public class Payment {
 
 	@Id
 	private String id;
 
 	@Column
-	private String productId;
+	private String stockId;
 
 	@Column
-	private int quantity;
+	private double paidAmount;
 
 	@Column
-	private double unitPrice;
+	private double totalAmount;
 
 	@Column
-	private double totalPrice;
+	private Date paymentDate;
 
 	@Column
-	private Date purchasedDate;
-
-	@Column
-	private String billingType;
-
-	@Column
-	private boolean isPaid;
-
-
+	private String paymentType;
 }

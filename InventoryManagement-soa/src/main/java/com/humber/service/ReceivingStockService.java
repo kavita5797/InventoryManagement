@@ -1,11 +1,13 @@
 package com.humber.service;
 
+import java.util.List;
+
 import com.humber.model.RecievingStock;
 
 public interface ReceivingStockService {
 
 	RecievingStock save(RecievingStock receivedStock);
 
-	boolean billPayment(String id, double amount, String paymentType);
+	List<RecievingStock> getAllStockDetails();
 
 }

@@ -20,6 +20,12 @@ public class RecievingStock {
 	private String productId;
 	
 	@Column
+	private String productName;
+	
+	@Column
+	private String merchantName;
+
+	@Column
 	private String merchantId;
 
 	@Column
@@ -30,16 +36,13 @@ public class RecievingStock {
 
 	@Column
 	private double totalPrice;
+	
+	@Column
+	private double totalPaidAmount;
 
 	@Column
 	private Date purchasedDate;
 
 	@Column
-	private String billingType;
-
-	@Column
-	private double paidAmount;
-
-	@Column
-	private Date lastPaidDate;
+	private int pendingPayment;
 }

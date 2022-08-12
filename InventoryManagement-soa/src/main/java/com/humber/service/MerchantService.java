@@ -18,4 +18,6 @@ public interface MerchantService {
 	DataTableVO<Merchant> getAllMerchantsByFilter(String searchText, int offset, int size, String sortField,
 			int sortOrder);
 
+	long getTotalCount();
+
 }

@@ -50,4 +50,9 @@ export class MerchantService {
     var url = this.baseurl + 'merchant/deleteMerchant?merchantId=' + id;
     return this.http.delete<any>(url);
   }
+
+  getMerchantCount(): Observable<any> {
+    var url = this.baseurl + 'merchant/count';
+    return this.http.get<any>(url);
+  }
 }

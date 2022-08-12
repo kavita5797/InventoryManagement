@@ -125,4 +125,14 @@ public class MerchantController extends BaseController {
 		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.NO_DATA_DELETED,
 				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
 	}
+	
+	@GetMapping("count")
+	@ApiOperation(value = "Get total merchat count")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
+	public ResponseVO<Long> getTotalCount() throws Exception {
+		logger.info("REST request to get total merchant count::");
+		long merchant = merchantService.getTotalCount();
+		return prepareSuccessResponse(merchant);
+
+	}
 }
