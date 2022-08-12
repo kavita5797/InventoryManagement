@@ -36,6 +36,13 @@ public class UserController extends BaseController {
 	@Autowired
 	UserService userService;
 
+	/**
+	 * This method is to get user by id.
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("getById/{id}")
 	@ApiOperation(value = "Get user by id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -52,6 +59,17 @@ public class UserController extends BaseController {
 
 	}
 
+	/**
+	 * This method is to get all user by pagination and filter.
+	 * 
+	 * @param searchText
+	 * @param offset
+	 * @param size
+	 * @param sortField
+	 * @param sortOrder
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping
 	@ApiOperation(value = "Get all users by search and pagination")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -72,6 +90,13 @@ public class UserController extends BaseController {
 
 	}
 
+	/**
+	 * This method is to get user by email.
+	 * 
+	 * @param emailId
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping(value = "getUserByEmail")
 	@ApiOperation(value = "Get user by email id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -89,11 +114,19 @@ public class UserController extends BaseController {
 
 	}
 
+	/**
+	 * 
+	 * This method is to autenticate user.
+	 * 
+	 * @param loginVO
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping(value = "login")
 	@ApiOperation(value = "Login")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
-	public ResponseVO<User> create(@RequestBody LoginVO loginVO) throws Exception {
+	public ResponseVO<User> login(@RequestBody LoginVO loginVO) throws Exception {
 		logger.info("Login user : ", loginVO.toString());
 
 		if (userService.getUserByEmailId(loginVO.getEmail()) == null) {
@@ -110,6 +143,13 @@ public class UserController extends BaseController {
 				CommonConstants.ErrorCode.INVALID_CREDENTIALS, CommonConstants.ErrorCodeMessage.INVALID_CREDENTIALS);
 	}
 
+	/**
+	 * This method is to create a new user.
+	 * 
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping(value = "signup")
 	@ApiOperation(value = "Create user")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -131,6 +171,13 @@ public class UserController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_SAVED);
 	}
 
+	/**
+	 * This method is to update existing user.
+	 * 
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
 	@PutMapping(value = "updateUser")
 	@ApiOperation(value = "Update user")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -149,6 +196,13 @@ public class UserController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_UPDATED);
 	}
 
+	/**
+	 * This method is to delete user.
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
 	@DeleteMapping(value = "deleteUser")
 	@ApiOperation(value = "Delete user")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -163,6 +217,12 @@ public class UserController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
 	}
 
+	/**
+	 * This method is to get total count.
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("count")
 	@ApiOperation(value = "Get total user count")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })

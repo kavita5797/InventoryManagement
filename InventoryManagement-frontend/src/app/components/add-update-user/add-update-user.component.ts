@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/service/UserService.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-add-update-user',
   templateUrl: './add-update-user.component.html',
@@ -23,6 +23,7 @@ export class AddUpdateUserComponent implements OnInit {
   constructor(
     private userservice: UserService,
     private _snackBar: MatSnackBar,
+    private _router : Router,
     private _activeRoute: ActivatedRoute
   ) {}
 
@@ -72,6 +73,7 @@ export class AddUpdateUserComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res.status && res.statusCode == '200') {
+          this._router.navigateByUrl("/user-list")
           this._snackBar.open('Admin User updated successfully.' , "OK");
         }
         if (

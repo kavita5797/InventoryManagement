@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.humber.common.utils.CommonUtility;
 import com.humber.common.vo.DataTableVO;
 import com.humber.common.vo.LoginVO;
 import com.humber.model.User;
@@ -28,11 +29,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	
 	@Override
 	public User authenticate(LoginVO loginVO) {
 		User user = userRepository.findByEmail(loginVO.getEmail());
 		if(user != null) {
-			if(user.getPassword().equals(loginVO.getPassword())) {
+			if(CommonUtility.decrypt(user.getPassword()).equals(loginVO.getPassword())) {
 				return user;
 			}
 			return null;
@@ -58,6 +60,8 @@ public class UserServiceImpl implements UserService {
 	public User saveUser(User user) {
 		user.setId(UUID.randomUUID().toString());
 		user.setIsActive(1);
+		String password = CommonUtility.encrypt(user.getPassword());
+		user.setPassword(password);
 		user = userRepository.save(user);
 		logger.info("User created::" + user.toString());
 		return user;
