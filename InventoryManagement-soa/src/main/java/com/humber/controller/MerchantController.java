@@ -38,6 +38,13 @@ public class MerchantController extends BaseController {
 	@Autowired
 	MerchantService merchantService;
 
+	/**
+	 * This method is to get merchant by id.
+	 * 
+	 * @param id
+	 * @return merchant
+	 * @throws Exception
+	 */
 	@GetMapping("getById/{id}")
 	@ApiOperation(value = "Get merchant by id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -54,6 +61,17 @@ public class MerchantController extends BaseController {
 
 	}
 
+	/**
+	 * This method is to get merchant by search and pagination.
+	 * 
+	 * @param searchText
+	 * @param offset
+	 * @param size
+	 * @param sortField
+	 * @param sortOrder
+	 * @return merchants
+	 * @throws Exception
+	 */
 	@GetMapping
 	@ApiOperation(value = "Get all merchants by search and pagination")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -64,7 +82,7 @@ public class MerchantController extends BaseController {
 			@RequestParam(value = "size", required = false, defaultValue = "20") int size,
 			@RequestParam(value = "sortField", required = false, defaultValue = "email") String sortField,
 			@RequestParam(value = "sortOrder", required = false, defaultValue = "1") int sortOrder) throws Exception {
-
+		logger.info("REST request to get merchants Pagination:: page" + offset + " size" + size);
 		DataTableVO<Merchant> data = merchantService.getAllMerchantsByFilter(searchText, offset, size, sortField,
 				sortOrder);
 		if (data != null) {
@@ -75,12 +93,18 @@ public class MerchantController extends BaseController {
 
 	}
 
+	/**
+	 * This method is to get merchants.
+	 * 
+	 * @return merchants
+	 * @throws Exception
+	 */
 	@GetMapping("getAllMerchants")
 	@ApiOperation(value = "Get all merchants")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
 	public ResponseVO<List<Merchant>> getAllMerchants() throws Exception {
-
+		logger.info("REST request to get merchants ::");
 		List<Merchant> data = merchantService.getAllMerchants();
 		if (data != null) {
 			return prepareSuccessResponse(data);
@@ -90,6 +114,13 @@ public class MerchantController extends BaseController {
 
 	}
 
+	/**
+	 * This method is to create a merchant.
+	 * 
+	 * @param merchant
+	 * @return merchant
+	 * @throws Exception
+	 */
 	@PostMapping(value = "addMerchant")
 	@ApiOperation(value = "Create merchant")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -111,6 +142,13 @@ public class MerchantController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_SAVED);
 	}
 
+	/**
+	 * This method is to update a merchant.
+	 * 
+	 * @param merchant
+	 * @return merchant
+	 * @throws Exception
+	 */
 	@PutMapping(value = "updateMerchant")
 	@ApiOperation(value = "Update merchant")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -129,6 +167,13 @@ public class MerchantController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_UPDATED);
 	}
 
+	/**
+	 * This method is to delete a merchant.
+	 * 
+	 * @param merchantId
+	 * @return isDelete
+	 * @throws Exception
+	 */
 	@DeleteMapping(value = "deleteMerchant")
 	@ApiOperation(value = "Delete merchant")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
@@ -143,6 +188,12 @@ public class MerchantController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
 	}
 
+	/**
+	 * This method is to get total count of merchant.
+	 * 
+	 * @return count
+	 * @throws Exception
+	 */
 	@GetMapping("count")
 	@ApiOperation(value = "Get total merchat count")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })

@@ -80,7 +80,7 @@ public class UserController extends BaseController {
 			@RequestParam(value = "size", required = false, defaultValue = "20") int size,
 			@RequestParam(value = "sortField", required = false, defaultValue = "email") String sortField,
 			@RequestParam(value = "sortOrder", required = false, defaultValue = "1") int sortOrder) throws Exception {
-
+		logger.info("REST request to get users Pagination:: page" + offset  + " size" + size);
 		DataTableVO<User> data = userService.getAllUsersByFilter(searchText, offset, size, sortField, sortOrder);
 		if (data != null) {
 			return prepareSuccessResponse(data);

@@ -28,17 +28,20 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	
-	
+
 	@Override
 	public User authenticate(LoginVO loginVO) {
+		logger.info("User autentication::" + loginVO.toString());
 		User user = userRepository.findByEmail(loginVO.getEmail().toLowerCase());
-		if(user != null) {
-			if(CommonUtility.decrypt(user.getPassword()).equals(loginVO.getPassword())) {
+		if (user != null) {
+			if (CommonUtility.decrypt(user.getPassword()).equals(loginVO.getPassword())) {
+				logger.info("User autentication success.");
 				return user;
 			}
+			logger.info("User autentication fail.");
 			return null;
 		}
+		logger.info("User autentication fail. No user found.");
 		return null;
 	}
 
@@ -46,13 +49,16 @@ public class UserServiceImpl implements UserService {
 	public User getUserById(String id) {
 		Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
+			logger.info("GET User by id found.");
 			return user.get();
 		}
+		logger.info("GET User by id not found.");
 		return null;
 	}
 
 	@Override
 	public User getUserByEmailId(String emailId) {
+		logger.info("GET User by emailid::");
 		return userRepository.findByEmail(emailId.toLowerCase());
 	}
 
@@ -97,6 +103,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUsers() {
+		logger.info("GET All users::");
 		return (List<User>) userRepository.findAll();
 	}
 
@@ -122,14 +129,14 @@ public class UserServiceImpl implements UserService {
 
 		userData.setResult(userList.getContent());
 		userData.setTotalRecords((int) userList.getTotalElements());
+		logger.info("GET All user pagination::" + userData.toString());
 		return userData;
 	}
 
 	@Override
 	public long getTotalCount() {
+		logger.info("GET All users count::" + userRepository.count());
 		return userRepository.count();
 	}
-
-	
 
 }

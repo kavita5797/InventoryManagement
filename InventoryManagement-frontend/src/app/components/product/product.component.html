@@ -9,34 +9,33 @@
 <div class="display-product">
 <table mat-table [dataSource]="data" class="mat-elevation-z8 product-table">
 
-    <ng-container matColumnDef="productlabel">
-        <th mat-header-cell *matHeaderCellDef> productlabel </th>
-        <td mat-cell *matCellDef="let element"> {{element.productlabel}} </td>
-    </ng-container>
-
-
     <ng-container matColumnDef="productname">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.productname}} </td>
     </ng-container>
 
     <ng-container matColumnDef="productcategory">
-        <th mat-header-cell *matHeaderCellDef> productcategory </th>
+        <th mat-header-cell *matHeaderCellDef> Product Category </th>
         <td mat-cell *matCellDef="let element"> {{element.productcategory}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="productlabel">
+        <th mat-header-cell *matHeaderCellDef> Product label </th>
+        <td mat-cell *matCellDef="let element"> {{element.productlabel}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="productquality">
-        <th mat-header-cell *matHeaderCellDef> productquality </th>
+        <th mat-header-cell *matHeaderCellDef> Product Quality </th>
         <td mat-cell *matCellDef="let element"> {{element.productquality}} </td>
     </ng-container>
 
     <ng-container matColumnDef="productprice">
-        <th mat-header-cell *matHeaderCellDef> productprice </th>
+        <th mat-header-cell *matHeaderCellDef> Product Price </th>
         <td mat-cell *matCellDef="let element"> {{element.productprice}} </td>
     </ng-container>
 
     <ng-container matColumnDef="productdescription">
-        <th mat-header-cell *matHeaderCellDef> productdescription </th>
+        <th mat-header-cell *matHeaderCellDef> Product Description </th>
         <td mat-cell *matCellDef="let element"> {{element.productdescription}} </td>
     </ng-container>
 

@@ -17,9 +17,8 @@ export class AddUpdateProductReceivingStockComponent implements OnInit {
   ProductStockForm = new FormGroup({
     productid: new FormControl<string | null>(''),
     merchantid: new FormControl<string | null>(''),
-    quantity: new FormControl<number | null>(0),
-    unitprice: new FormControl<number | null>(0),
-    totalprice: new FormControl<number | null>(0),
+    quantity: new FormControl<number >(0),
+    unitprice: new FormControl<number >(0),
     purchaseddate: new FormControl<Date | null>(new Date()),
   });
 
@@ -93,7 +92,7 @@ export class AddUpdateProductReceivingStockComponent implements OnInit {
       productId: this.ProductStockForm.value.productid,
       purchasedDate: this.ProductStockForm.value.purchaseddate,
       quantity: this.ProductStockForm.value.quantity,
-      totalPrice: this.ProductStockForm.value.totalprice,
+      totalPrice: this.ProductStockForm.value.quantity! * this.ProductStockForm.value.unitprice!,
       unitPrice: this.ProductStockForm.value.unitprice,
     };
     console.log(productreceivingstock);
@@ -124,4 +123,6 @@ export class AddUpdateProductReceivingStockComponent implements OnInit {
         }
       );
   }
+
+ 
 }
