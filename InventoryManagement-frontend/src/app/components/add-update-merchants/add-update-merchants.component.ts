@@ -86,7 +86,7 @@ export class AddUpdateMerchantsComponent implements OnInit {
         if (
           !res.status &&
           res.statusCode == '500' &&
-          res.errorCode == 'E5005'
+          res.errorCode == 'E5006'
         ) {
         this._snackBar.open(res.message , 'OK');
         }
