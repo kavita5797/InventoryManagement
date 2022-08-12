@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddUpdateMerchantsComponent } from './components/add-update-merchants/add-update-merchants.component';
+import { AddUpdateProductReceivingStockComponent } from './components/add-update-product-receiving-stock/add-update-product-receiving-stock.component';
 import { AddUpdateProductComponent } from './components/add-update-product/add-update-product.component';
 import { AddUpdateUserComponent } from './components/add-update-user/add-update-user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -25,8 +26,8 @@ const routes: Routes = [
   { path: 'product-list/:id', component: ProductComponent },
   { path: 'add-update-product', component: AddUpdateProductComponent },
   { path: 'add-update-product/:id', component: AddUpdateProductComponent },
-
   { path: 'product-category-list', component: ProductCategoryListComponent },
+  { path: 'add-update-product-receiving-stock', component: AddUpdateProductReceivingStockComponent },
   { path: 'product-stock', component: ProductReceivingStockComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },

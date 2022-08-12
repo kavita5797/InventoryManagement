@@ -26,6 +26,7 @@ import { MerchantsListComponent } from './components/merchants-list/merchants-li
 import { AddUpdateMerchantsComponent } from './components/add-update-merchants/add-update-merchants.component';
 import { MerchantService } from './service/MerchantService.service';
 import { ProductCategoryService } from './service/ProductCategoryService.service';
+import { AddUpdateProductReceivingStockComponent } from './components/add-update-product-receiving-stock/add-update-product-receiving-stock.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { ProductCategoryService } from './service/ProductCategoryService.service
     ProductReceivingStockComponent,
     MerchantsListComponent,
     AddUpdateMerchantsComponent,
+    AddUpdateProductReceivingStockComponent,
   ],
   imports: [
     BrowserModule,

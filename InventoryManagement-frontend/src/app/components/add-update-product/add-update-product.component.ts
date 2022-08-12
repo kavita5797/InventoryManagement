@@ -17,7 +17,6 @@ export class AddUpdateProductComponent implements OnInit {
     name: new FormControl<string | null>(''),
     label: new FormControl<string | null>(''),
     quality: new FormControl<number | null>(0),
-    //category: new FormControl<string | null>(''),
     category: new FormControl('',Validators.required),
     price: new FormControl<number | null>(0),
     
@@ -93,8 +92,7 @@ export class AddUpdateProductComponent implements OnInit {
         console.log(err);
         this._snackBar.open('Something went wrong. Please try again.', 'OK');
       }
-      
-      
+
     )
   }
 
@@ -132,10 +130,6 @@ export class AddUpdateProductComponent implements OnInit {
         this._snackBar.open('Something went wrong. Please try again.', 'OK');
       } 
     )
-
-
-
-
   }
   
   addProduct(){
