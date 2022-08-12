@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.humber.common.constants.CommonConstants;
 import com.humber.common.vo.ResponseVO;
 import com.humber.model.Product;
-import com.humber.model.User;
 import com.humber.service.ProductService;
 
 import io.swagger.annotations.Api;
@@ -118,5 +117,25 @@ public class ProductController extends BaseController {
 				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
 	}
 	
+	@GetMapping("count")
+	@ApiOperation(value = "Get total product count")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
+	public ResponseVO<Long> getTotalCount() throws Exception {
+		logger.info("REST request to get total product count::");
+		long productCount = productService.getTotalCount();
+		return prepareSuccessResponse(productCount);
+
+	}
+	
+	@GetMapping("outofstock")
+	@ApiOperation(value = "Get total out of stock product count")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
+	public ResponseVO<Long> getTotalOutOfStockCount() throws Exception {
+		logger.info("REST request to get total out of stock product count::");
+		long productCount = productService.getTotalCount();
+		return prepareSuccessResponse(productCount);
+
+	}
+
 
 }

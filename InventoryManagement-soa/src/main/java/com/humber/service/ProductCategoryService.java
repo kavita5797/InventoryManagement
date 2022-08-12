@@ -12,5 +12,7 @@ public interface ProductCategoryService {
 
 	boolean deleteProductCategory(String pcategoryid);
 
+	long getTotalCount();
+
 
 }

@@ -15,19 +15,15 @@ export class ProductReceivingStockComponent implements OnInit {
   data: any[] = [];
   displayedColumns: string[] =
    [
-  'merchantId', 
-  'merchantName',
-  'quantity', 
-  'productId',  
   'productName', 
+  'merchantName',
+  'quantity',  
   'purchasedDate',
-  // 'billing_type',
-  // 'paid_amount',
-  // 'last_paid_date',
   'totalPrice',
   'unitPrice',
   'pendingPayment',
-  'totalPaidAmount'];
+  'totalPaidAmount',
+  'actions'];
   constructor(private _router: Router, private activeRoute: ActivatedRoute,
     private productStockService:ProductStockService, private _snackBar: MatSnackBar) { }
 
@@ -49,6 +45,9 @@ export class ProductReceivingStockComponent implements OnInit {
     this._router.navigateByUrl("/add-update-product-receiving-stock");
   }
 
+  payBill(id:string){
+    this._router.navigateByUrl("/payment/" + id);
+  }
 
 
 

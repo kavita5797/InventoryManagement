@@ -20,3 +20,8 @@ a{
     text-decoration: underline !important;
     color: blue !important;
 }
+
+.save-btn{
+    background-color: #673ab7 !important;
+    border: none !important
+}

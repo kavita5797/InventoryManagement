@@ -16,6 +16,10 @@ public interface ProductService {
 	boolean deleteProduct(String productId);
 	
 	Product updateProduct(Product product);
+
+	long getTotalCount();
+
+	long getTotalOutOfStockCount();
 	
 	
 

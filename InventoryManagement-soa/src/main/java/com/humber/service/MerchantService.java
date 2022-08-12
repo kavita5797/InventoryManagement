@@ -1,5 +1,7 @@
 package com.humber.service;
 
+import java.util.List;
+
 import com.humber.common.vo.DataTableVO;
 import com.humber.model.Merchant;
 
@@ -19,5 +21,7 @@ public interface MerchantService {
 			int sortOrder);
 
 	long getTotalCount();
+
+	List<Merchant> getAllMerchants();
 
 }

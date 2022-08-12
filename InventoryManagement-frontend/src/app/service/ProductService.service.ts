@@ -36,4 +36,14 @@ export class ProductService {
       id;
     return this.http.delete<any>(url);
   }
+
+  getProductCount(): Observable<any> {
+    var url = this.baseurl + 'product/count';
+    return this.http.get<any>(url);
+  }
+
+  getOutOfStockProductCount(): Observable<any> {
+    var url = this.baseurl + 'product/outofstock';
+    return this.http.get<any>(url);
+  }
 }

@@ -38,4 +38,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 		 }
 	}
 
+	@Override
+	public long getTotalCount() {
+		return pcatRepository.count();
+	}
+
 }

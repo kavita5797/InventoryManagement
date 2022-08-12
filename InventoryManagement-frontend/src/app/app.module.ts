@@ -28,6 +28,7 @@ import { MerchantService } from './service/MerchantService.service';
 import { ProductCategoryService } from './service/ProductCategoryService.service';
 import { AddUpdateProductReceivingStockComponent } from './components/add-update-product-receiving-stock/add-update-product-receiving-stock.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { AddPaymentComponent } from './components/add-payment/add-payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { PaymentComponent } from './components/payment/payment.component';
     AddUpdateMerchantsComponent,
     AddUpdateProductReceivingStockComponent,
     PaymentComponent,
+    AddPaymentComponent,
   ],
   imports: [
     BrowserModule,

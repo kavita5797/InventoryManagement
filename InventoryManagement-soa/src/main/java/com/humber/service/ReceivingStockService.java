@@ -10,4 +10,6 @@ public interface ReceivingStockService {
 
 	List<RecievingStock> getAllStockDetails();
 
+	int getAllPendingPaymentCount();
+
 }

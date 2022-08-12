@@ -1,10 +1,15 @@
- <div class="add-update-btn-div">
+<div class="add-update-btn-div">
     <div class="card">
         <div class="card-body pd-card">
             <h2> Product Details</h2>
             <form class="col-12" [formGroup]="productForm" (ngSubmit)="onSubmit()">
-               
-                
+
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Name
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="name" name="name" id="name" />
+                </div>
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         Description
@@ -17,27 +22,19 @@
                     <label class="col-sm-2 col-form-label label-text">
                         Category
                     </label>
-                    
-                        <select class="form-control col-sm-10" formControlName="category">
-                            <option disabled>Select Category:</option>
-                            
-                            <option *ngFor="let cat of categories">{{cat}}</option>
-                        </select>
+
+                    <select class="form-control col-sm-10" formControlName="category" (change)="onCategoryChange()">
+                        <option disabled>Select Category:</option>
+                        <option *ngFor="let cat of categories">{{cat.category}}</option>
+                    </select>
                 </div>
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Name
-                    </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="name" name="name"
-                        id="name" />
-                </div>
+                
 
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         Label
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="label" name="label"
-                        id="label" />
+                    <input type="text" class="form-control col-sm-10" formControlName="label" name="label" id="label" />
                 </div>
 
                 <div class="form-row mt-2 mb-2 input-text">
@@ -48,7 +45,7 @@
                         id="price" />
                 </div>
 
-                
+
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         Quality

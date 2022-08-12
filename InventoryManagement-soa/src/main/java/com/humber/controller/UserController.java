@@ -56,7 +56,7 @@ public class UserController extends BaseController {
 	@ApiOperation(value = "Get all users by search and pagination")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
-	public ResponseVO<DataTableVO<User>> getAllGroups(
+	public ResponseVO<DataTableVO<User>> getAllUsers(
 			@RequestParam(value = "searchText", required = false) String searchText,
 			@RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
 			@RequestParam(value = "size", required = false, defaultValue = "20") int size,

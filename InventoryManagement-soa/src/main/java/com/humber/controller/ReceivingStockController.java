@@ -45,6 +45,16 @@ public class ReceivingStockController extends BaseController {
 		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.NO_DATA_FOUND,
 				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
 	}
+	
+	@GetMapping(value = "/pendingPayments")
+	@ApiOperation(value = "GET all pending Payments count")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 500, message = "E5002-NO_DATA_SAVED", response = ResponseVO.class) })
+	public ResponseVO<Integer> getAllPendingPaymentCount() throws Exception {
+		logger.info("GET all Receiving Stock : ");
+		int count = receivingStockService.getAllPendingPaymentCount();
+		return prepareSuccessResponse(count);
+	}
 
 	@PostMapping
 	@ApiOperation(value = "Receiving Stock")

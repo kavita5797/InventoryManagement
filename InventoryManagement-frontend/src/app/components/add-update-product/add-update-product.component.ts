@@ -77,8 +77,7 @@ export class AddUpdateProductComponent implements OnInit {
     this.productCategoryService.getAllProductCategory().subscribe(
       (res)=>{
         console.log(res);
-        //
-        this.categories = res.data[''];
+        this.categories = res.data;
         console.log(this.categories);
         if (
           !res.status &&
@@ -113,7 +112,6 @@ export class AddUpdateProductComponent implements OnInit {
         console.log(res);
         if (res.status && res.statusCode == '200') {
           this._snackBar.open('Product updated successfully.', 'OK');
-          //this.getAllProducts();
           this._router.navigateByUrl("/product-list");
           this.productForm.reset();
         }
@@ -122,7 +120,7 @@ export class AddUpdateProductComponent implements OnInit {
           res.statusCode == '500' &&
           res.errorCode == 'E5005'
         ) {
-          this._snackBar.open(res.message);
+        this._snackBar.open(res.message , 'OK');
         }
       },
       (err) => {
@@ -150,7 +148,7 @@ export class AddUpdateProductComponent implements OnInit {
         if (res.status && res.statusCode == '200') {
           this._snackBar.open('Product Added successfully.', 'OK');
           //this.getAllProducts();
-          this._router.navigateByUrl("/product");
+          this._router.navigateByUrl("/product-list");
           this.productForm.reset();
         }
         if (
@@ -158,7 +156,7 @@ export class AddUpdateProductComponent implements OnInit {
           res.statusCode == '500' &&
           res.errorCode == 'E5005'
         ) {
-          this._snackBar.open(res.message);
+        this._snackBar.open(res.message , 'OK');
         }
       },
       (err) => {
@@ -166,6 +164,10 @@ export class AddUpdateProductComponent implements OnInit {
         this._snackBar.open('Something went wrong. Please try again.', 'OK');
       } 
     )
+  }
+
+  onCategoryChange(){
+
   }
 
 }

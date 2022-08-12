@@ -1,5 +1,7 @@
 package com.humber.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +58,7 @@ public class MerchantController extends BaseController {
 	@ApiOperation(value = "Get all merchants by search and pagination")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
-	public ResponseVO<DataTableVO<Merchant>> getAllGroups(
+	public ResponseVO<DataTableVO<Merchant>> getAllMerchantsByFilter(
 			@RequestParam(value = "searchText", required = false) String searchText,
 			@RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
 			@RequestParam(value = "size", required = false, defaultValue = "20") int size,
@@ -65,6 +67,21 @@ public class MerchantController extends BaseController {
 
 		DataTableVO<Merchant> data = merchantService.getAllMerchantsByFilter(searchText, offset, size, sortField,
 				sortOrder);
+		if (data != null) {
+			return prepareSuccessResponse(data);
+		}
+		return prepareErrorResponse(HttpStatus.NOT_FOUND.value(), CommonConstants.ErrorCode.NO_DATA_FOUND,
+				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
+
+	}
+
+	@GetMapping("getAllMerchants")
+	@ApiOperation(value = "Get all merchants")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
+	public ResponseVO<List<Merchant>> getAllMerchants() throws Exception {
+
+		List<Merchant> data = merchantService.getAllMerchants();
 		if (data != null) {
 			return prepareSuccessResponse(data);
 		}
@@ -125,7 +142,7 @@ public class MerchantController extends BaseController {
 		return prepareErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), CommonConstants.ErrorCode.NO_DATA_DELETED,
 				CommonConstants.ErrorCodeMessage.NO_DATA_DELETED);
 	}
-	
+
 	@GetMapping("count")
 	@ApiOperation(value = "Get total merchat count")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })

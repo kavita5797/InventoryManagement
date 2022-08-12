@@ -46,7 +46,7 @@ public class PaymentServiceImpl  implements PaymentService{
 				receivingStockRepository.save(recStock);
 			}
 			
-			
+			return true;
 		}
 		
 		return false;

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.humber.common.constants.CommonConstants;
 import com.humber.common.vo.ResponseVO;
-import com.humber.model.Product;
 import com.humber.model.ProductCategory;
 import com.humber.service.ProductCategoryService;
 
@@ -84,7 +83,15 @@ public class ProductCategoryController extends BaseController{
 	}
 	
 	
-	
+	@GetMapping("count")
+	@ApiOperation(value = "Get total product category count")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class) })
+	public ResponseVO<Long> getTotalCount() throws Exception {
+		logger.info("REST request to get total product  category count::");
+		long productcategoryCount = productCategoryService.getTotalCount();
+		return prepareSuccessResponse(productcategoryCount);
+
+	}
 	
 	
 }

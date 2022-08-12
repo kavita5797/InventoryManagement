@@ -38,11 +38,11 @@ public class RecievingStock {
 	private double totalPrice;
 	
 	@Column
-	private double totalPaidAmount;
+	private double totalPaidAmount = 0;
 
 	@Column
 	private Date purchasedDate;
 
 	@Column
-	private int pendingPayment;
+	private int pendingPayment = 1;
 }

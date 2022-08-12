@@ -78,7 +78,7 @@ export class ProductCategoryListComponent implements OnInit {
           res.statusCode == '500' &&
           res.errorCode == 'E5005'
         ) {
-          this._snackBar.open(res.message);
+        this._snackBar.open(res.message , 'OK');
         }
       },
       (err) => {

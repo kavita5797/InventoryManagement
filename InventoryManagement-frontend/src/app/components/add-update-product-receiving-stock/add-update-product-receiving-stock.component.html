@@ -2,80 +2,48 @@
     <div class="card">
         <div class="card-body pd-card">
             <h2> Product Receiving Stock Details</h2>
-            <h4>Product details</h4>
             <form class="col-12" [formGroup]="ProductStockForm" (ngSubmit)="onSubmit()">
-                  
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Billing Type
-                    </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="billingtype" name="billingtype"
-                        id="billingtype" />
-                </div>
-              
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Last Paid Date
-                    </label>
-                    <input type="date" class="form-control col-sm-10" formControlName="lastpaiddate" name="lastpaiddate"
-                        id="lastpaiddate" />
-                </div>
-              
-
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Product Id
-                    </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="productid" name="productid"
-                        id="productid" />
-                </div>
-              
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Product Name
-                    </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="productname" name="productname"
-                        id="productname" />
-                </div>
-                
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Paid Amount
-                    </label>
-                    <input type="number" class="form-control col-sm-10" formControlName="paidamount" name="paidamount"
-                        id="paidamount"/>
-                </div>
-
-
-                <h2>Merchant Details</h2>
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Merchant Id
-                    </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="merchantid" name="merchantid" id="merchantid" />
-                </div>
 
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         Merchant Name
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="merchantname" name="merchantname" id="merchantname" />
+
+                    <select class="form-control col-sm-10" formControlName="merchantid"
+                        (change)="onMerchantChange($event)">
+                        <option disabled>Select Merchant:</option>
+                        <option *ngFor="let merchant of merchantData" [ngValue]="merchant.id">
+                            {{merchant.name}}</option>
+                    </select>
                 </div>
 
-                <h2>Stock & Other Details</h2>
-                
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Product Name
+                    </label>
+
+                    <select class="form-control col-sm-10" formControlName="productid"
+                        (change)="onProductChange($event)">
+                        <option disabled>Select Product:</option>
+                        <option *ngFor="let product of productsData" [ngValue]="product.id">{{product.productname}}</option>
+                    </select>
+                </div>
+
+
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         Quantity
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="quantity" name="quantity" id="quantity" />
+                    <input type="text" class="form-control col-sm-10" formControlName="quantity" name="quantity"
+                        id="quantity" />
                 </div>
 
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         Unit Price
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="unitprice" name="unitprice" id="unitprice" />
+                    <input type="text" class="form-control col-sm-10" formControlName="unitprice" name="unitprice"
+                        id="unitprice" />
                 </div>
 
 
@@ -83,33 +51,18 @@
                     <label class="col-sm-2 col-form-label label-text">
                         Total Price
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="totalprice" name="totalprice" id="totalprice" />
+                    <input type="text" class="form-control col-sm-10" formControlName="totalprice" name="totalprice"
+                        id="totalprice" />
                 </div>
-
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Total Paid Amount
-                    </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="totalpaidamount" name="totalpaidamount" id="totalpaidamount" />
-                </div>
-
 
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
                         Purchased Date
                     </label>
-                    <input type="date" class="form-control col-sm-10" formControlName="purchaseddate" name="purchaseddate" id="purchaseddate" />
+                    <input type="date" class="form-control col-sm-10" formControlName="purchaseddate"
+                        name="purchaseddate" id="purchaseddate" />
                 </div>
 
-
-                <div class="form-row mt-2 mb-2 input-text">
-                    <label class="col-sm-2 col-form-label label-text">
-                        Pending Payment
-                    </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="pendingpayment" name="pendingpayment" id="pendingpayment" />
-                </div>
-
-             
                 <div class="mt-2 mb-1 btn-div">
                     <button type="submit" class="btn btn-primary btn save-btn">
                         SAVE

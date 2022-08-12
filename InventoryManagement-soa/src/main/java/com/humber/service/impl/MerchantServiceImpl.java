@@ -1,5 +1,6 @@
 package com.humber.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -103,6 +104,11 @@ public class MerchantServiceImpl implements MerchantService {
 	@Override
 	public long getTotalCount() {
 		return merchantRepository.count();
+	}
+
+	@Override
+	public List<Merchant> getAllMerchants() {
+		return (List<Merchant>) merchantRepository.findAll();
 	}
 
 }

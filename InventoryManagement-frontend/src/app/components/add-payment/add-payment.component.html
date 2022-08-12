@@ -1,0 +1,33 @@
+<div class="add-update-btn-div">
+    <div class="card">
+        <div class="card-body pd-card">
+            <h2> Payment</h2>
+            <h4> Stock Id : {{stockid}} </h4>
+            <form class="col-12" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+
+
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Paid Amount
+                    </label>
+                    <input type="number" class="form-control col-sm-10" formControlName="paidamount" name="paidamount"
+                        id="paidamount" />
+                </div>
+
+                <div class="form-row mt-2 mb-2 input-text">
+                    <label class="col-sm-2 col-form-label label-text">
+                        Billing Type
+                    </label>
+                    <input type="text" class="form-control col-sm-10" formControlName="billingtype" name="billingtype"
+                        id="billingtype" />
+                </div>
+
+                <div class="mt-2 mb-1 btn-div">
+                    <button type="submit" class="btn btn-primary btn save-btn">
+                        SAVE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

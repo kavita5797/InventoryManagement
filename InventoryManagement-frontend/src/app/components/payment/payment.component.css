@@ -1,6 +1,4 @@
-/* table {
-  width: 100%;
-} */
+
 
 .add-update-btn-div {
     margin-top: 10px;
@@ -24,7 +22,7 @@
   }
   
   table {
-    width: 50%;
+    width: 100%;
     table-layout: fixed;
   }
   

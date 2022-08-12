@@ -15,3 +15,8 @@ button{
 .btn-div{
     text-align: center !important;
 }
+
+.save-btn{
+    background-color: #673ab7 !important;
+    border: none !important
+}

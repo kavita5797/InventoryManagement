@@ -25,4 +25,9 @@ export class ProductCategoryService {
       id;
     return this.http.delete<any>(url);
   }
+
+  getProductCategoryCount(): Observable<any> {
+    var url = this.baseurl + 'category/count';
+    return this.http.get<any>(url);
+  }
 }

@@ -31,6 +31,11 @@ export class MerchantService {
     return this.http.get<any[]>(url);
   }
 
+  getAll() : Observable<any>{
+    var url = this.baseurl + 'merchant/getAllMerchants';
+    return this.http.get<any[]>(url);
+  }
+
   getMerchantById(id: String): Observable<any> {
     var url = this.baseurl + 'merchant/getById/' + id;
     return this.http.get<any>(url);

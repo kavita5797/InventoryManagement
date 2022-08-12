@@ -20,4 +20,9 @@ export class ProductStockService {
     var url = this.baseurl + 'receivingStock';
     return this.http.post<any>(url, productstock);
   }
+
+  getPendingPaymentCount(): Observable<any> {
+    var url = this.baseurl + 'receivingStock/pendingPayments';
+    return this.http.get<any>(url);
+  }
 }

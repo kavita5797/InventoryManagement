@@ -1,5 +1,5 @@
 .pd-card{
-    width: 50em;
+    width: 70em;
     margin: auto;
     margin-top: 10px !important;
 }
@@ -10,4 +10,10 @@ h2{
 
 .btn-div{
     text-align: center;
+}
+
+
+.save-btn{
+    background-color: #673ab7 !important;
+    border: none !important
 }

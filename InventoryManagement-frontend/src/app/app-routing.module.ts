@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddPaymentComponent } from './components/add-payment/add-payment.component';
 import { AddUpdateMerchantsComponent } from './components/add-update-merchants/add-update-merchants.component';
 import { AddUpdateProductReceivingStockComponent } from './components/add-update-product-receiving-stock/add-update-product-receiving-stock.component';
 import { AddUpdateProductComponent } from './components/add-update-product/add-update-product.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'payment', component: PaymentComponent },
   { path: 'add-update-product-receiving-stock', component: AddUpdateProductReceivingStockComponent },
   { path: 'product-stock', component: ProductReceivingStockComponent },
+  { path: 'payment/:id', component: AddPaymentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   

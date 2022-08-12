@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MerchantService } from 'src/app/service/MerchantService.service';
+import { ProductStockService } from 'src/app/service/product-stock.service';
+import { ProductCategoryService } from 'src/app/service/ProductCategoryService.service';
 import { ProductService } from 'src/app/service/ProductService.service';
 import { UserService } from 'src/app/service/UserService.service';
 
@@ -21,12 +23,18 @@ export class DashboardComponent implements OnInit {
     private userService: UserService,
     private merchantService: MerchantService,
     private productService: ProductService,
+    private productCategoryService: ProductCategoryService,
+    private receivingStockService : ProductStockService,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.getAllUserCount();
     this.getAllMerchantCount();
+    this.getAllProductCount();
+    this.getAllProductCategoryCount();
+    this.getTotalPendingPayments();
+    this.getOutOfStockProducts();
   }
 
   getAllUserCount() {
@@ -56,10 +64,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllProductCount() {
-    this.userService.getUserCount().subscribe(
+    this.productService.getProductCount().subscribe(
       (res) => {
         console.log(res);
-        this.userCount = res.data;
+        this.productCount = res.data;
       },
       (err) => {
         console.log(err);
@@ -68,7 +76,42 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  getOutOfStockProduct() {}
+  getAllProductCategoryCount() {
+    this.productCategoryService.getProductCategoryCount().subscribe(
+      (res) => {
+        console.log(res);
+        this.productCategoryCount = res.data;
+      },
+      (err) => {
+        console.log(err);
+        this._snackBar.open('Something went wrong. Please try again.', 'OK');
+      }
+    );
+  }
 
-  getPendingPayments() {}
+  getOutOfStockProducts() {
+    this.productService.getOutOfStockProductCount().subscribe(
+      (res) => {
+        console.log(res);
+        this.outOfStockProductCount = res.data;
+      },
+      (err) => {
+        console.log(err);
+        this._snackBar.open('Something went wrong. Please try again.', 'OK');
+      }
+    );
+  }
+
+  getTotalPendingPayments() {
+    this.receivingStockService.getPendingPaymentCount().subscribe(
+      (res) => {
+        console.log(res);
+        this.pendingPaymentCount = res.data;
+      },
+      (err) => {
+        console.log(err);
+        this._snackBar.open('Something went wrong. Please try again.', 'OK');
+      }
+    );
+  }
 }

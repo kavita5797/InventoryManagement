@@ -12,41 +12,36 @@ import com.humber.repository.ProductRepository;
 import com.humber.service.ProductService;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
-	
 	@Autowired
 	ProductRepository productRepository;
-	
+
 	@Override
 	public List<Product> getAllProducts() {
 		return (List<Product>) productRepository.findAll();
 	}
-	
-	
+
 	@Override
 	public Optional<Product> getProductById(String productId) {
 		return productRepository.findById(productId);
 	}
 
-
 	@Override
 	public Product updateProduct(Product product) {
-		if(productRepository.findById(product.getId()).isPresent()) {
+		if (productRepository.findById(product.getId()).isPresent()) {
 			Product p = productRepository.findById(product.getId()).get();
 			p.setProductname(product.getProductname());
+			p.setProductcategory(product.getProductcategory());
 			p.setProductdescription(product.getProductdescription());
 			p.setProductlabel(product.getProductlabel());
 			p.setProductprice(product.getProductprice());
 			return productRepository.save(p);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
 
-	
-	
 	@Override
 	public Product saveProduct(Product product) {
 		product.setId(UUID.randomUUID().toString());
@@ -57,13 +52,21 @@ public class ProductServiceImpl implements ProductService{
 	public boolean deleteProduct(String productId) {
 		try {
 			productRepository.deleteById(productId);
-			 return true;
-		 }
-		 catch(Exception e) {
-			 return false;
-		 }
-		
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 
-	
+	@Override
+	public long getTotalCount() {
+		return productRepository.count();
+	}
+
+	@Override
+	public long getTotalOutOfStockCount() {
+		return productRepository.countByProductquality(0);
+	}
+
 }

@@ -8,4 +8,6 @@ import com.humber.model.Product;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, String>{
 
+	long countByProductquality(int i);
+
 }

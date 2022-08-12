@@ -8,4 +8,6 @@ import com.humber.model.RecievingStock;
 @Repository
 public interface ReceivingStockRepository extends CrudRepository<RecievingStock, String> {
 
+	int countByPendingPayment(int i);
+
 }
