@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/service/ProductService.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import {MatSelectModule} from '@angular/material/select';
+import { ProductCategoryService } from 'src/app/service/ProductCategoryService.service';
 @Component({
   selector: 'app-add-update-product',
   templateUrl: './add-update-product.component.html',
   styleUrls: ['./add-update-product.component.css']
 })
 export class AddUpdateProductComponent implements OnInit {
+  categories: any[] = [];
   productForm = new FormGroup({
     description: new FormControl<string | null>(''),
     name: new FormControl<string | null>(''),
     label: new FormControl<string | null>(''),
     quality: new FormControl<number | null>(0),
-    category: new FormControl<string | null>(''),
+    //category: new FormControl<string | null>(''),
+    category: new FormControl('',Validators.required),
     price: new FormControl<number | null>(0),
     
 
@@ -23,13 +26,15 @@ export class AddUpdateProductComponent implements OnInit {
 
   id:string = '';
   constructor(private _router: Router, private _activeRoute: ActivatedRoute,
-    private productService: ProductService, private _snackBar: MatSnackBar) { }
+    private productService: ProductService, private _snackBar: MatSnackBar,
+    private productCategoryService:ProductCategoryService) { }
 
   ngOnInit(): void {
     this.id = this._activeRoute.snapshot.params['id'];
     if (this.id != '') {
       console.log(this.id);
       this.getProductById(this.id);
+      this.getCategories();
     }
   }
 
@@ -39,12 +44,12 @@ export class AddUpdateProductComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res.status && res.statusCode == '200') {
-          this.productForm.controls.name.setValue(res.data.name);
-          this.productForm.controls.description.setValue(res.data.description);
-          this.productForm.controls.label.setValue(res.data.label);
-          this.productForm.controls.category.setValue(res.data.category);
-          this.productForm.controls.price.setValue(res.data.price);
-          this.productForm.controls.quality.setValue(res.data.quality);
+          this.productForm.controls.name.setValue(res.data.productname);
+          this.productForm.controls.description.setValue(res.data.productdescription);
+          this.productForm.controls.label.setValue(res.data.productlabel);
+          this.productForm.controls.category.setValue(res.data.productcategory);
+          this.productForm.controls.price.setValue(res.data.productprice);
+          this.productForm.controls.quality.setValue(res.data.productquality);
         }
         if (
           !res.status &&
@@ -67,6 +72,30 @@ export class AddUpdateProductComponent implements OnInit {
     } else {
       this.addProduct();
     }
+  }
+
+  getCategories(){
+    this.productCategoryService.getAllProductCategory().subscribe(
+      (res)=>{
+        console.log(res);
+        //
+        this.categories = res.data[''];
+        console.log(this.categories);
+        if (
+          !res.status &&
+          res.statusCode == '500' &&
+          res.errorCode == 'E5006'
+        ) {
+          this._snackBar.open(res.message, 'OK');
+        }
+      },
+      (err) => {
+        console.log(err);
+        this._snackBar.open('Something went wrong. Please try again.', 'OK');
+      }
+      
+      
+    )
   }
 
   updateProduct(){

@@ -17,8 +17,12 @@
                     <label class="col-sm-2 col-form-label label-text">
                         Category
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="category" name="category"
-                        id="description" />
+                    
+                        <select class="form-control col-sm-10" formControlName="category">
+                            <option disabled>Select Category:</option>
+                            
+                            <option *ngFor="let cat of categories">{{cat}}</option>
+                        </select>
                 </div>
                 <div class="form-row mt-2 mb-2 input-text">
                     <label class="col-sm-2 col-form-label label-text">
@@ -40,7 +44,7 @@
                     <label class="col-sm-2 col-form-label label-text">
                         Price
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="price" name="price"
+                    <input type="number" class="form-control col-sm-10" formControlName="price" name="price"
                         id="price" />
                 </div>
 
@@ -49,7 +53,7 @@
                     <label class="col-sm-2 col-form-label label-text">
                         Quality
                     </label>
-                    <input type="text" class="form-control col-sm-10" formControlName="quality" name="quality"
+                    <input type="number" class="form-control col-sm-10" formControlName="quality" name="quality"
                         id="quality" />
                 </div>
 

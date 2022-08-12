@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,15 +55,15 @@ public class ProductController extends BaseController {
 	}
 	
 	
-	@GetMapping(value = "getProductById")
+	@GetMapping(value = "getProductById/{id}")
 	@ApiOperation(value = "Get product by id")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
 			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
-	public ResponseVO<Optional<Product>> getProductById(@RequestParam(value = "productId", required = true) String productId)
+	public ResponseVO<Optional<Product>> getProductById(@PathVariable("id") String id)
 			throws Exception {
-		logger.info("REST request to get a Product by id: {}", productId);
+		logger.info("REST request to get a Product by id: {}", id);
 
-		Optional<Product> product = productService.getProductById(productId);
+		Optional<Product> product = productService.getProductById(id);
 		if (product != null) {
 			return prepareSuccessResponse(product);
 		}
