@@ -7,6 +7,7 @@ import { AddUpdateUserComponent } from './components/add-update-user/add-update-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { MerchantsListComponent } from './components/merchants-list/merchants-list.component';
+import { PaymentComponent } from './components/payment/payment.component';
 import { ProductCategoryListComponent } from './components/product-category-list/product-category-list.component';
 import { ProductReceivingStockComponent } from './components/product-receiving-stock/product-receiving-stock.component';
 import { ProductComponent } from './components/product/product.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'add-update-product', component: AddUpdateProductComponent },
   { path: 'add-update-product/:id', component: AddUpdateProductComponent },
   { path: 'product-category-list', component: ProductCategoryListComponent },
+  { path: 'payment', component: PaymentComponent },
   { path: 'add-update-product-receiving-stock', component: AddUpdateProductReceivingStockComponent },
   { path: 'product-stock', component: ProductReceivingStockComponent },
   { path: 'login', component: LoginComponent },

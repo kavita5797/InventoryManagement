@@ -1,6 +1,7 @@
 package com.humber.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,6 +50,11 @@ public class PaymentServiceImpl  implements PaymentService{
 		}
 		
 		return false;
+	}
+
+	@Override
+	public List<Payment> getAllPayments() {
+		return (List<Payment>) paymentRepository.findAll();
 	}
 
 }

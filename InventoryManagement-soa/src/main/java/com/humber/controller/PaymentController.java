@@ -1,9 +1,12 @@
 package com.humber.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.humber.common.constants.CommonConstants;
 import com.humber.common.vo.ResponseVO;
+import com.humber.model.Payment;
+import com.humber.model.Product;
 import com.humber.service.PaymentService;
 
 import io.swagger.annotations.Api;
@@ -28,6 +33,23 @@ public class PaymentController extends BaseController {
 	@Autowired
 	PaymentService paymentService;
 
+	@GetMapping
+	@ApiOperation(value = "Get all Payments")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),
+			@ApiResponse(code = 404, message = "E5001-NO_DATA_FOUND", response = ResponseVO.class) })
+	public ResponseVO<List<Payment>> getAllPayments() throws Exception {
+		logger.info("REST request to get all products: {}");
+
+		List<Payment> payment = paymentService.getAllPayments();
+		if (payment != null && !payment.isEmpty()) {
+			return prepareSuccessResponse(payment);
+		}
+		return prepareErrorResponse(HttpStatus.NOT_FOUND.value(), CommonConstants.ErrorCode.NO_DATA_FOUND,
+				CommonConstants.ErrorCodeMessage.NO_DATA_FOUND);
+
+	}
+	
+	
 	@PostMapping("/payBill")
 	@ApiOperation(value = "Bill payment")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = ResponseVO.class),

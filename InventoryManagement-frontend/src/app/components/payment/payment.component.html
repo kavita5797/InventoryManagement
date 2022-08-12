@@ -1,0 +1,41 @@
+
+
+<div class="display-payment">
+<table mat-table [dataSource]="data" class="mat-elevation-z8 payment-table">
+
+    <ng-container matColumnDef="stockId">
+        <th mat-header-cell *matHeaderCellDef> Stock ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.stockId}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="paidAmount">
+        <th mat-header-cell *matHeaderCellDef> Paid Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.paidAmount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalAmount">
+        <th mat-header-cell *matHeaderCellDef> Total Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="paymentDate">
+        <th mat-header-cell *matHeaderCellDef> Payment Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.paymentDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="paymentType">
+        <th mat-header-cell *matHeaderCellDef> Payment Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.paymentType}} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+</div>
+
+
